@@ -1,0 +1,29 @@
+html {
+  font-size: 18px;
+}
+
+body {
+  line-height: 1.6;
+}
+
+/* Give the page breathing room + constrain line width */
+.container {
+  max-width: 45rem;          /* Perfect reading width */
+  margin: 0 auto;
+  padding: 2.25rem 1.5rem;
+}
+
+/* Headings spacing */
+h1, h2, h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* Blockquote spacing and style */
+blockquote {
+  margin: 1.5rem 0;
+  padding-left: 1.25rem;
+  border-left: 3px solid rgba(255,255,255,0.4);
+  opacity: 0.9;
+  font-style: italic;
+}

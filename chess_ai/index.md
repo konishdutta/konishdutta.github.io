@@ -5,7 +5,7 @@ layout: default
 
 # Teaching machines chess from first principles
 
-I'm ~1800–1900 in Lichess Rapid, and like many serious hobbyists, I’ve thought a lot about how chess *works*. Tactics are explainable, but concepts like strategy and pressure are much harder to explain. I can feel it when my opponent is putting me in a suffocating position, but I would have a hard time teaching someone how to reproduce that feeling.
+I'm ~1800–1900 in Lichess Rapid, and like many serious hobbyists, I’ve thought a lot about how chess *works*. Tactics are explainable, but concepts like strategy and pressure are much harder to explain. I can feel it when my opponent is putting me in a suffocating position, but I would have a hard time teaching someone how to reproduce that vibe.
 
 This is why I've always been fascinated with chess engines. The top engines are better than any human is, and I've always wondered:
 
