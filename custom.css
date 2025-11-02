@@ -1,9 +1,18 @@
 html { font-size: 16px; }
 body { line-height: 1.55; } /* Slightly tighter than 1.65 */
 
+/* Override Tufte's default left padding layout */
+body.tufte {
+  width: auto;
+  padding-left: 0;
+  padding-right: 0;
+  max-width: none;
+}
+
+
 /* Keep the readable text column */
 .content.container {
-  max-width: 42rem;        /* slightly narrower for better measure */
+  max-width: 42rem;
   margin: 0 auto;
   padding: 2rem 1.5rem;
 }
