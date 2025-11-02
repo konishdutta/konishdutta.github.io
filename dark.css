@@ -1,0 +1,45 @@
+/* Full Tufte Dark Mode Enhancement */
+
+@media (prefers-color-scheme: dark) {
+
+  body {
+    background-color: #151515 !important;
+    color: #ddd !important;
+  }
+
+  /* Links */
+  a, a:visited {
+    color: #9ecbff !important;
+  }
+  a:hover {
+    color: #c3e4ff !important;
+  }
+
+  /* Headings */
+  h1, h2, h3, h4, h5, h6 {
+    color: #fff !important;
+  }
+
+  /* Sidenotes / Marginnotes */
+  .sidenote, .marginnote {
+    color: #ccc !important;
+  }
+
+  /* Code + Pre blocks */
+  pre, code {
+    background-color: #1e1e1e !important;
+    color: #f8f8f2 !important;
+    border: 1px solid #333 !important;
+  }
+
+  /* Blockquotes */
+  blockquote {
+    color: #cfcfcf !important;
+    border-left: 3px solid #444 !important;
+  }
+
+  /* HR */
+  hr {
+    border-color: #333 !important;
+  }
+}
