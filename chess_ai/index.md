@@ -21,7 +21,7 @@ There are broadly two ways to train a chess engine:
    <label for="mn-1" class="margin-toggle">⊕</label>
    <input type="checkbox" id="mn-1" class="margin-toggle"/>
    <span class="marginnote quote">
-     In this approach, the engine doesn't *discover* strategy — it inherits ours.
+     In this approach, the engine doesn't *discover* strategy. We provide the engine our opinion of the best ways to evaluate chess and it applies that evaluation in its play.
    </span>
 
    Common heuristics we can encode:
