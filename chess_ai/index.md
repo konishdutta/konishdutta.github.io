@@ -9,29 +9,32 @@ I'm ~1800–1900 in Lichess Rapid, and like many serious hobbyists, I’ve thoug
 
 This is why I've always been fascinated with chess engines. The top engines are better than any human is, and I've always wondered:
 
-<label for="mn-1" class="margin-toggle">⊕</label>
-<input type="checkbox" id="mn-1" class="margin-toggle"/>
-<span class="marginnote quote">
-  <em>Is the engine good because it approximates strategy by grinding through tactical positions? Or do engines actually learn <strong>strategy</strong>?</em>
-</span>
+<div class="epigraph">
+  <blockquote>
+    <p><em>Is the engine good because it approximates strategy by grinding through tactical positions?</em></p>
+    <p><em>Or do engines actually learn <strong>strategy</strong>?</em></p>
+  </blockquote>
+</div>
 
 There are broadly two ways to train a chess engine:
 
 1. **Encode our existing human understanding.**  
-   We can tell a computer how to value material. For example, a queen is worth more than a pawn.
-   We can also provide heuristics that represent our opinions of best practices:
-   * "Take the center"
+   We can provide heuristics that represent our opinions of best practices. This is how Deep Blue was trained to beat Kasparov and most of the engines I grew up with (OG Stockfish, Houdini) use this approach.
+   <label for="mn-1" class="margin-toggle">⊕</label>
+    <input type="checkbox" id="mn-1" class="margin-toggle"/>
+    <span class="marginnote quote">
+    In approach 1, some heuristics to consider:
+    * We can assign values to material: Queen > Rook > Bishop / Knight > Pawn
+    * "Take the center"
    * "A knight on the rim is dim"
    * King safety
    * Important squares between opening, middle, endgame.
-   This is how Deep Blue was trained to beat Kasparov and most of the engines I grew up with (OG Stockfish, Houdini) use this approach.
+   </span>
 
 2. **Let the machine discover chess for itself.**  
-   Just tell the machine the rules of the game and nothing else.
-   Let the machine discover its own opinions from first principles.
-   AlphaZero and Leela are trained in this way.
+   Just tell the machine the rules of the game and nothing else. The machine has to learn chess from first principles. AlphaZero and Leela are trained in this way.
 
-I wanted to understand the second approach *not because it's better in practice* (Stockfish still beats AlphaZero at equal compute), but because it asks a more interesting question:
+It always felt mystical to me that a machine could see enough games and learn chess better than I've learned it through focused study, and I wanted to replicate that. The following is a summary of my findings as I built a **AlphaZero like neural network-based chess engine from scratch**.
 
 
 ## Project goals
