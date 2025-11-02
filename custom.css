@@ -42,11 +42,11 @@ body.tufte {
 .content.container figure,
 .content.container pre > code {
   width: 100% !important;
-  max-width: 65ch;               /* keep comfy line length for long code/paras */
+  max-width: 62ch;               /* a touch denser than 65ch */
 }
 
 /* Headings: calm editorial scale */
-h1 { margin-top: 0; margin-bottom: 1.2rem; font-size: 2.4rem; line-height: 1.2; font-weight: 400; }
+h1 { margin-top: 0; margin-bottom: 1rem; font-size: 2.2rem; line-height: 1.2; font-weight: 400; }
 h2 { font-size: 1.7rem; margin-top: 2rem;  margin-bottom: .8rem; font-weight: 400; }
 h3 { font-size: 1.35rem; margin-top: 1.6rem; margin-bottom: .6rem; font-weight: 400; }
 
@@ -59,20 +59,20 @@ h3 { font-size: 1.35rem; margin-top: 1.6rem; margin-bottom: .6rem; font-weight: 
   opacity: 0.95;
 }
 
-/* Epigraph / thesis question: centered, no border */
+/* Epigraph / thesis question: centered, no border (tighter + smaller) */
 .epigraph blockquote {
   border-left: none !important;
   text-align: center;
-  max-width: 32rem;
-  margin: 2rem auto 2.2rem;
+  max-width: 30rem;
+  margin: 1.6rem auto 1.8rem;
   padding: 0;
   opacity: 1 !important;
 }
 .epigraph blockquote p {
   margin: 0 0 .8rem 0;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   line-height: 1.45;
-  opacity: .92;
+  opacity: .9;
 }
 
 /* Margin notes: style + allow short lists */
@@ -80,7 +80,8 @@ h3 { font-size: 1.35rem; margin-top: 1.6rem; margin-bottom: .6rem; font-weight: 
 .marginnote.quote {
   font-style: italic;
   font-size: 0.95rem;
-  opacity: 0.9;
+  opacity: 0.85;
+  transform: translateY(-.2rem);
 }
 .marginnote ul,
 .marginnote ol {
@@ -92,10 +93,15 @@ h3 { font-size: 1.35rem; margin-top: 1.6rem; margin-bottom: .6rem; font-weight: 
 }
 .marginnote li + li { margin-top: .25rem; }
 
-/* Bring notes a bit closer on wide screens (tweak -24rem ↔ -28rem to taste) */
+/* Bring notes a bit closer on wide screens (tweak -23rem ↔ -26rem to taste) */
 @media (min-width: 900px) {
-  .marginnote, .sidenote { margin-right: -26rem; width: 18rem; }
+  .marginnote, .sidenote { margin-right: -24rem; width: 18rem; }
 }
+
+/* List rhythm under sections */
+.content.container ul { margin: .6rem 0 0 0; }
+.content.container li { margin: .25rem 0; }
+.content.container li::marker { font-size: .9em; }
 
 /* Margin toggle icon (mobile) */
 label.margin-toggle {
@@ -111,11 +117,11 @@ code, pre > code { font-size: 0.95rem; line-height: 1.45; }
 /* Dark-mode polish */
 @media (prefers-color-scheme: dark) {
   .content.container > blockquote { border-left-color: rgba(255,255,255,0.35); }
-  .marginnote.quote { opacity: 0.85; }
+  .marginnote.quote { opacity: 0.82; }
 }
 
 /* Small-screen tweaks: keep padding but let content breathe edge-to-edge */
 @media (max-width: 640px) {
   .content.container { padding: 1.5rem 1rem; }
-  .epigraph blockquote { margin: 1.6rem auto 1.8rem; }
+  .epigraph blockquote { margin: 1.4rem auto 1.6rem; }
 }
