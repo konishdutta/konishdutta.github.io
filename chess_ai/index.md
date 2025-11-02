@@ -1,9 +1,14 @@
 ---
-title: Chess AI Research Notes
+title: Teaching machines to beat me in chess
 layout: default
 ---
 
-This is a working research notebook documenting the design of my AlphaZero-style neural chess engine.
+# Teaching machines to beat me in chess
+
+I'm ~1800–1900 on Lichess Rapid and I’ve always wanted to train a chess engine that can consistently beat me.^[Ambition check: I’ll start with a tiny model and 8×8 board, then scale.]
+
+## Project goals
+* 
 
 ## Memos
 1. (Coming Soon) Board Representation
