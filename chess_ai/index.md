@@ -5,7 +5,8 @@ layout: default
 
 # Teaching machines to beat me in chess
 
-I'm ~1800–1900 on Lichess Rapid and I’ve always wanted to train a chess engine that can consistently beat me.^[Ambition check: I’ll start with a tiny model and 8×8 board, then scale.]
+I'm ~1800–1900 on Lichess Rapid and I’ve always wanted to train a chess engine that can consistently beat me.<span class="sidenote">Ambition check: start with a tiny model and scale.</span>
+
 
 ## Project goals
 * 
