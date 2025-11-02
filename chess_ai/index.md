@@ -5,36 +5,38 @@ layout: default
 
 # Teaching machines chess from first principles
 
-I'm ~1800–1900 in Lichess Rapid, and like many serious hobbyists, I’ve thought a lot about how chess *works*. Tactics are explainable, but concepts like strategy and pressure are much harder to explain. I can feel it when my opponent is putting me in a suffocating position, but I would have a hard time teaching someone how to reproduce that vibe.
+I'm ~1800–1900 in Lichess Rapid, and like many serious hobbyists, I've spent a lot of time thinking about how chess *works*. Tactics are teachable, but strategy and pressure feel more like a **vibe**. I know it when I feel it, but explaining *why* it's happening is **hard**.
 
 This is why I've always been fascinated with chess engines. The top engines are better than any human is, and I've always wondered:
-
 <div class="epigraph">
   <blockquote>
-    <p><em>Is the engine good because it approximates strategy by grinding through tactical positions?</em></p>
-    <p><em>Or do engines actually learn <strong>strategy</strong>?</em></p>
+    <p><em>Are engines strong because they calculate <strong>tactics</strong> well?</em></p>
+    <p><em>Or because they have actually learned <strong>strategy</strong>?</em></p>
   </blockquote>
 </div>
-
 There are broadly two ways to train a chess engine:
 
-1. **Encode our existing human understanding.**  
-   We can provide heuristics that represent our opinions of best practices. This is how Deep Blue was trained to beat Kasparov and most of the engines I grew up with (OG Stockfish, Houdini) use this approach.
+1. **Teach the engine "good" chess.**  
+   We provide heuristics that encode our opinions of what strong play looks like. This is how Deep Blue beat Kasparov, and how earlier versions of Stockfish and Houdini worked.
    <label for="mn-1" class="margin-toggle">⊕</label>
-    <input type="checkbox" id="mn-1" class="margin-toggle"/>
-    <span class="marginnote quote">
-    In approach 1, some heuristics to consider:
-    * We can assign values to material: Queen > Rook > Bishop / Knight > Pawn
-    * "Take the center"
-   * "A knight on the rim is dim"
-   * King safety
-   * Important squares between opening, middle, endgame.
+   <input type="checkbox" id="mn-1" class="margin-toggle"/>
+   <span class="marginnote quote">
+     In this approach, the engine doesn't *discover* strategy — it inherits ours.
    </span>
 
-2. **Let the machine discover chess for itself.**  
-   Just tell the machine the rules of the game and nothing else. The machine has to learn chess from first principles. AlphaZero and Leela are trained in this way.
+   Common heuristics we can encode:
+   - Rewarding material (Queen > Rook > Bishop ≈ Knight > Pawn)
+   - Control of the center (e.g. "A knight on the rim is dim.")
+   - King safety
+   - Different priorities across opening, middlegame, endgame
 
-It always felt mystical to me that a machine could see enough games and learn chess better than I've learned it through focused study, and I wanted to replicate that. The following is a summary of my findings as I built a **AlphaZero like neural network-based chess engine from scratch**.
+2. **Let the machine discover chess for itself.**  
+   Just tell the machine the rules of the game and nothing else (no human guidance of what "good" chess is). The machine has to learn chess from first principles. AlphaZero and Leela are trained in this way.
+
+It always felt mystical to me that a machine could see enough games and learn chess better than I've learned it through focused study, and I wanted to replicate that.
+
+The following is a summary of what I learned while building an **AlphaZero-style neural-network chess engine from scratch**.
+
 
 
 ## Project goals
