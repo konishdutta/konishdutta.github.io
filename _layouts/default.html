@@ -5,15 +5,16 @@
   <title>{{ page.title }}</title>
 
   <!-- Tufte CSS -->
+  <!-- <link rel="stylesheet" href="{{ '/latex.css' | relative_url }}"> -->
   <link rel="stylesheet" href="{{ '/tufte.css' | relative_url }}">
   <link rel="stylesheet" href="{{ '/dark.css' | relative_url }}">
-  <link rel="stylesheet" href="{{ '/latex.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/custom.css' | relative_url }}"> <!-- NEW -->
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body class="tufte">
-  <article class="group">
+  <article class="content container">
     {{ content }}
   </article>
 </body>
