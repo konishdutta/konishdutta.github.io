@@ -9,8 +9,11 @@ I'm ~1800–1900 in Lichess Rapid, and like many serious hobbyists, I’ve thoug
 
 This is why I've always been fascinated with chess engines. The top engines are better than any human is, and I've always wondered:
 
-> Is the engine good because it approximates strategy by grinding through tactical positions?
-> Or do engines actually learn *strategy*?
+<label for="mn-1" class="margin-toggle">⊕</label>
+<input type="checkbox" id="mn-1" class="margin-toggle"/>
+<span class="marginnote quote">
+  <em>Is the engine good because it approximates strategy by grinding through tactical positions? Or do engines actually learn <strong>strategy</strong>?</em>
+</span>
 
 There are broadly two ways to train a chess engine:
 
@@ -28,7 +31,7 @@ There are broadly two ways to train a chess engine:
    Let the machine discover its own opinions from first principles.
    AlphaZero and Leela are trained in this way.
 
-I wanted to understand the second approach — *not because it's better in practice* (Stockfish still beats AlphaZero at equal compute), but because it asks a more interesting question:
+I wanted to understand the second approach *not because it's better in practice* (Stockfish still beats AlphaZero at equal compute), but because it asks a more interesting question:
 
 
 ## Project goals

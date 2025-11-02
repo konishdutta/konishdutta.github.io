@@ -4,18 +4,21 @@
   <meta charset="utf-8">
   <title>{{ page.title }}</title>
 
-  <!-- Tufte CSS -->
-  <!-- <link rel="stylesheet" href="{{ '/latex.css' | relative_url }}"> -->
+  <!-- Order matters: load Tufte, then dark, then your overrides -->
   <link rel="stylesheet" href="{{ '/tufte.css' | relative_url }}">
   <link rel="stylesheet" href="{{ '/dark.css' | relative_url }}">
-  <link rel="stylesheet" href="{{ '/custom.css' | relative_url }}"> <!-- NEW -->
+  <!-- REMOVE latex.css for this page (it constrains width) -->
+  <!-- <link rel="stylesheet" href="{{ '/latex.css' | relative_url }}"> -->
+  <link rel="stylesheet" href="{{ '/custom.css' | relative_url }}">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body class="tufte">
   <article class="content container">
-    {{ content }}
+    <section class="main">
+      {{ content }}
+    </section>
   </article>
 </body>
 </html>

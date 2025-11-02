@@ -1,29 +1,54 @@
-html {
-  font-size: 18px;
-}
+html { font-size: 16px; }
+body { line-height: 1.55; } /* Slightly tighter than 1.65 */
 
-body {
-  line-height: 1.6;
-}
-
-/* Give the page breathing room + constrain line width */
-.container {
-  max-width: 45rem;          /* Perfect reading width */
+/* Keep the readable text column */
+.content.container {
+  max-width: 42rem;        /* slightly narrower for better measure */
   margin: 0 auto;
-  padding: 2.25rem 1.5rem;
+  padding: 2rem 1.5rem;
 }
 
-/* Headings spacing */
-h1, h2, h3 {
-  margin-top: 2rem;
-  margin-bottom: 1rem;
+/* Override Tufte's 55% widths so paragraphs don't feel narrow */
+.content.container p,
+.content.container ul,
+.content.container ol,
+.content.container blockquote p,
+.content.container figure,
+.content.container pre > code {
+  width: 100% !important;
+  max-width: 65ch; /* ensures readable line length */
 }
 
-/* Blockquote spacing and style */
+/* Cleaner blockquote */
 blockquote {
-  margin: 1.5rem 0;
-  padding-left: 1.25rem;
-  border-left: 3px solid rgba(255,255,255,0.4);
-  opacity: 0.9;
+  margin: 1.25rem 0 !important;
+  padding-left: 1rem;
+  border-left: 3px solid rgba(0,0,0,0.25);
+  opacity: 0.95;
   font-style: italic;
+}
+
+/* Headings: compact and elegant */
+h1 {
+  margin-top: 0;
+  margin-bottom: 1.2rem;
+  font-size: 2.4rem; /* slightly smaller */
+}
+h2 { font-size: 1.7rem; margin-top: 2rem; }
+h3 { font-size: 1.35rem; margin-top: 1.6rem; }
+
+/* Margin-quote styling */
+.marginnote.quote {
+  font-style: italic;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  opacity: 0.95;
+}
+
+/* Make the margin toggle symbol subtle */
+label.margin-toggle {
+  color: currentColor;
+  opacity: 0.6;
+  margin-left: .25rem;
+  font-weight: 600;
 }
