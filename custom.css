@@ -1,7 +1,16 @@
-html { font-size: 12px; }
-body { line-height: 1.55; } /* Slightly tighter than 1.65 */
+/* ------------------------------------------------------------
+   Konish — Tufte overrides (custom.css)
+   Works with: tufte.css, dark.css
+   Goals: readable measure, sane type scale, clean epigraphs,
+          margin notes that behave, and no cramped widths.
+------------------------------------------------------------- */
 
-/* Override Tufte's default left padding layout */
+/* Base type scale */
+html { font-size: 15px; }        /* ~15px body copy */
+body { line-height: 1.5; }
+
+/* Kill Tufte's page-wide left padding layout;
+   we'll center a readable column instead. */
 body.tufte {
   width: auto;
   padding-left: 0;
@@ -9,15 +18,23 @@ body.tufte {
   max-width: none;
 }
 
-
-/* Keep the readable text column */
+/* Centered reading column */
 .content.container {
-  max-width: 42rem;
+  max-width: 42rem;              /* ~70–75 chars */
   margin: 0 auto;
   padding: 2rem 1.5rem;
 }
 
-/* Override Tufte's 55% widths so paragraphs don't feel narrow */
+/* Normalize paragraph/list sizing (Tufte sets 1.4rem by default) */
+.content.container p,
+.content.container dl,
+.content.container ol,
+.content.container ul {
+  font-size: 1rem !important;    /* 1rem = root (15px) */
+  line-height: 1.5 !important;
+}
+
+/* Undo Tufte's 55% column widths inside our container */
 .content.container p,
 .content.container ul,
 .content.container ol,
@@ -25,36 +42,62 @@ body.tufte {
 .content.container figure,
 .content.container pre > code {
   width: 100% !important;
-  max-width: 65ch; /* ensures readable line length */
+  max-width: 65ch;               /* keep comfy line length for long code/paras */
 }
 
-/* Cleaner blockquote */
-blockquote {
+/* Headings: calm editorial scale */
+h1 { margin-top: 0; margin-bottom: 1.2rem; font-size: 2.4rem; line-height: 1.2; font-weight: 400; }
+h2 { font-size: 1.7rem; margin-top: 2rem;  margin-bottom: .8rem; font-weight: 400; }
+h3 { font-size: 1.35rem; margin-top: 1.6rem; margin-bottom: .6rem; font-weight: 400; }
+
+/* Main-column blockquotes (NOT epigraphs) */
+.content.container > blockquote {
   margin: 1.25rem 0 !important;
   padding-left: 1rem;
   border-left: 3px solid rgba(0,0,0,0.25);
-  opacity: 0.95;
   font-style: italic;
+  opacity: 0.95;
 }
 
-/* Headings: compact and elegant */
-h1 {
-  margin-top: 0;
-  margin-bottom: 1.2rem;
-  font-size: 2.4rem; /* slightly smaller */
+/* Epigraph / thesis question: centered, no border */
+.epigraph blockquote {
+  border-left: none !important;
+  text-align: center;
+  max-width: 32rem;
+  margin: 2rem auto 2.2rem;
+  padding: 0;
+  opacity: 1 !important;
 }
-h2 { font-size: 1.7rem; margin-top: 2rem; }
-h3 { font-size: 1.35rem; margin-top: 1.6rem; }
+.epigraph blockquote p {
+  margin: 0 0 .8rem 0;
+  font-size: 1.1rem;
+  line-height: 1.45;
+  opacity: .92;
+}
 
-/* Margin-quote styling */
+/* Margin notes: style + allow short lists */
+.marginnote, .sidenote { line-height: 1.35; }
 .marginnote.quote {
   font-style: italic;
   font-size: 0.95rem;
-  line-height: 1.5;
-  opacity: 0.95;
+  opacity: 0.9;
+}
+.marginnote ul,
+.marginnote ol {
+  margin: .4rem 0 0 0;
+  padding-left: 1.1rem;
+  list-style-position: outside;
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+.marginnote li + li { margin-top: .25rem; }
+
+/* Bring notes a bit closer on wide screens (tweak -24rem ↔ -28rem to taste) */
+@media (min-width: 900px) {
+  .marginnote, .sidenote { margin-right: -26rem; width: 18rem; }
 }
 
-/* Make the margin toggle symbol subtle */
+/* Margin toggle icon (mobile) */
 label.margin-toggle {
   color: currentColor;
   opacity: 0.6;
@@ -62,19 +105,17 @@ label.margin-toggle {
   font-weight: 600;
 }
 
-/* Epigraph / major-question emphasis */
-.epigraph blockquote {
-  font-style: italic;
-  text-align: center;
-  max-width: 34rem;
-  margin: 3rem auto;
-  padding: 0;
-  border: none;
-  opacity: 0.9;
-  line-height: 1.45;
+/* Code size (slightly smaller than body, but readable) */
+code, pre > code { font-size: 0.95rem; line-height: 1.45; }
+
+/* Dark-mode polish */
+@media (prefers-color-scheme: dark) {
+  .content.container > blockquote { border-left-color: rgba(255,255,255,0.35); }
+  .marginnote.quote { opacity: 0.85; }
 }
 
-.epigraph blockquote p {
-  margin: 0 0 0.75rem 0;
-  font-size: 1.2rem;
+/* Small-screen tweaks: keep padding but let content breathe edge-to-edge */
+@media (max-width: 640px) {
+  .content.container { padding: 1.5rem 1rem; }
+  .epigraph blockquote { margin: 1.6rem auto 1.8rem; }
 }
