@@ -1,52 +1,71 @@
 /* -----------------------------------------------------------
-   Konish — Tufte overrides (custom.css)
+   Konish — Tufte "Japandi" skin (custom.css)
+   Calm neutrals, warm emphasis, quiet hierarchy
    Works with: tufte.css, dark.css
 ------------------------------------------------------------ */
-@import url('https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,300..700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap');
 
-/* Design tokens */
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,300..700&family=Inter:wght@500;600;700&display=swap');
+
+/* ---------------- Tokens ---------------- */
 :root{
-  --base-font: 20px;
-  --lh: 1.5;
+  /* scale */
+  --base-font: 19px;
+  --lh: 1.55;
   --measure: 42rem;      /* main column width */
-  --max-ch: 62ch;        /* readable line length for text blocks */
+  --max-ch: 62ch;        /* readable line length */
   --note-width: 18rem;   /* sidenote width */
   --note-offset: -22rem; /* distance from main column */
+
+  /* palette (warm, low-chroma) */
+  --bg: hsl(26 12% 8%);          /* page bg */
+  --ink: hsl(28 12% 83%);        /* body text */
+  --ink-dim: hsl(28 10% 68%);    /* secondary */
+  --rule: hsl(28 8% 28%);        /* separators */
+  --accent: hsl(35 28% 78%);     /* warm emphasis */
+  --accent-strong: hsl(35 38% 82%);
+
+  /* components */
+  --blockquote-rule: hsl(28 12% 32%);
+  --code-bg: hsl(26 10% 12%);
+
+  /* epigraph */
+  --epi-top: 1.25rem;
+  --epi-bottom: 1.25rem;
+  --epi-inner-gap: .28rem;
 }
 
-/* Base type */
-html { font-size: var(--base-font) !important; }
-body {
-    font-family: "Literata", serif !important;
-    font-optical-sizing: auto;
-    font-synthesis-weight: none;   /* don't fake bold */
-    font-weight: 400;
-    line-height: var(--lh);
+/* -------- Base / layout -------- */
+html { font-size: var(--base-font); }
+body.tufte {
+  background: var(--bg);
+  color: var(--ink);
+  padding: 0;
+  max-width: none;
+  font-kerning: normal;
+  font-feature-settings: "kern";
 }
-
-/* Make bold actually scan */
-strong, b {
-    font-weight: 650;
-    color: #f4e7c3;
-} 
-/* Literata variable weight */
-em { font-style: italic; }
-
-/* Layout */
-body.tufte { padding: 0; max-width: none; }
 .content.container {
   max-width: var(--measure);
   margin: 0 auto;
   padding: 2rem 1.5rem;
 }
 
-code { font-size: .95rem; line-height: 1.45; }
-pre > code { font-size: .95rem; line-height: 1.45; }
+/* Type families */
+body{
+  font-family: "Literata", serif;
+  line-height: var(--lh);
+  font-weight: 400;
+  font-optical-sizing: auto;
+  font-synthesis-weight: none;   /* don't fake bold */
+}
+h1,h2,h3,.sidenote,.marginnote{
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
 
-/* Normalize typography + widths inside the container */
+/* Normalize typography inside the container */
 .content.container :where(p, dl, ol, ul){
-  font-size: inherit !important;      /* allow base size to propagate */
+  font-size: 1rem !important;
   line-height: var(--lh) !important;
 }
 .content.container :where(p, ul, ol, figure, blockquote p, pre>code){
@@ -54,105 +73,89 @@ pre > code { font-size: .95rem; line-height: 1.45; }
   max-width: var(--max-ch);
 }
 
-/* Headings */
-h1, h2, h3,
-.sidenote, .marginnote {
-  font-family: "Inter", sans-serif;
-}
-h1, h2, h3 { font-weight: 600; }
-h1 { letter-spacing: .005em; }   /* tiny tracking helps in dark mode */
-h1 { margin: 0 0 1rem; font-size: 2.2rem; line-height: 1.2; }
-h2 { margin: 2rem 0 .8rem; font-size: 1.7rem; }
-h3 { margin: 1.6rem 0 .6rem; font-size: 1.35rem; }
+/* -------- Hierarchy -------- */
+h1,h2,h3{ font-weight: 600; letter-spacing: .003em; }
+h1{ font-size: 2.25rem; line-height: 1.2; margin: 0 0 1rem; color: var(--accent-strong); }
+h2{ font-size: 1.6rem; margin: 1.9rem 0 .8rem; color: var(--accent); }
+h3{ font-size: 1.25rem; margin: 1.3rem 0 .6rem; color: var(--ink); }
 
-/* Main-column blockquotes (NOT epigraphs) */
+/* Emphasis */
+strong, b{ font-weight: 650; color: var(--accent-strong); }
+em{ font-style: italic; }
+
+/* Paragraph rhythm */
+.content.container p{ margin: .7rem 0; }
+
+/* Lists */
+.content.container ul{ margin: .6rem 0 0; }
+.content.container li{ margin: .22rem 0; }
+.content.container li::marker{ color: var(--ink-dim); }
+
+/* Blockquotes (main column) */
 .content.container > blockquote{
-  margin: 0.9rem 0 !important;
-  padding-left: 1.35rem;                       /* space from rule */
-  border-left: 4px solid rgba(255,255,255,0.28);
+  margin: 1rem 0 !important;
+  padding-left: 1.2rem;
+  border-left: 3px solid var(--blockquote-rule);
+  color: var(--ink);
   font-style: italic;
 }
-@media (max-width: 640px){
-  html { font-size: 18px !important; }
-  .content.container > blockquote{
-    margin: 0.8rem 0 !important;
-    padding-left: 1.2rem;
-    border-left-width: 3px;
-  }
+
+/* Sidenotes / margin notes */
+.sidenote, .marginnote{
+  font-size: .92rem;
+  line-height: 1.4;
+  color: var(--ink-dim);
+}
+label.margin-toggle{ display:inline-block; line-height:1; vertical-align:-.15em; }
+
+/* Code */
+code, pre>code{ font-size: .95rem; line-height: 1.45; }
+pre{
+  background: var(--code-bg);
+  border: 1px solid var(--rule);
+  padding: .9rem 1rem;
+  border-radius: .6rem;
 }
 
-/* Dark mode blockquote rule needed a bit more contrast */
-@media (prefers-color-scheme: dark){
-  .content.container > blockquote { border-left-color: rgba(255,255,255,.45); }
+/* Rules / hr */
+hr{
+  border: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--rule), transparent);
+  margin: 1.5rem 0;
 }
 
-/* Lists + notes rhythm */
-.content.container ul { margin: .6rem 0 0; }
-.content.container li { margin: .25rem 0; }
-.content.container li::marker { font-size: .9em; }
-
-.marginnote, .sidenote { line-height: 1.35; }
-.marginnote.quote { font-style: italic; font-size: .95rem; opacity: .85; }
-.marginnote :where(ul, ol){
-  margin: .4rem 0 0;
-  padding-left: 1.1rem;
-  list-style-position: outside;
-  font-size: .9rem;
-  line-height: 1.35;
-}
-.marginnote li + li { margin-top: .25rem; }
-
-label.margin-toggle{
-  display: inline-block;
-  line-height: 1;
-  vertical-align: -.15em;
-}
-
-/* Code size */
-code, pre>code { font-size: .95rem; line-height: 1.45; }
-
-/* Paragraph margins (guard if tufte bumps globally) */
-.content.container p { margin: .65rem 0; }
-
-/* Dark-mode polish */
-@media (prefers-color-scheme: dark){
-  .content.container > blockquote { border-left-color: rgba(255,255,255,.35); }
-  .marginnote.quote { opacity: .82; }
-}
-
-/* --- Clamp epigraph spacing at the wrapper, kill inner margins --- */
-:root{
-  --epi-top: 1.25rem;         /* space above the whole epigraph */
-  --epi-bottom: 1.25rem;      /* space below the whole epigraph */
-  --epi-inner-gap: .28rem;   /* line gap inside the quote */
-}
-
+/* Epigraphs */
 .content.container .epigraph{
-  display: flow-root;                            /* stops margin-collapsing */
+  display: flow-root;                            /* stop margin-collapsing */
   margin-block: var(--epi-top) var(--epi-bottom) !important;
   padding: 0 !important;
 }
-
-/* kill any default blockquote margins inside epigraph */
 .content.container .epigraph > blockquote{
   margin: 0 !important;
-  padding-left: 1.2rem;                          /* room from the left rule */
-  border-left: 3px solid rgba(255,255,255,.22);  /* keep if you want the rule */
+  padding-left: 1.1rem;
+  border-left: 3px solid var(--blockquote-rule);
   text-align: left;
 }
-
-/* inner line spacing only */
 .content.container .epigraph blockquote p{
   margin: 0 0 var(--epi-inner-gap) !important;
 }
 .content.container .epigraph blockquote p:last-child{
   margin-bottom: 0 !important;
 }
-
-/* adjacent siblings: keep small, symmetric gaps */
 .content.container :is(p,ul,ol,blockquote,figure,pre,hr,h2,h3,h4) + .epigraph{
   margin-top: var(--epi-top) !important;
 }
 .content.container .epigraph + :is(p,ul,ol,blockquote,figure,pre,hr,h2,h3,h4){
   margin-top: var(--epi-bottom) !important;
+}
+
+/* Links — soft, not neon */
+a{ color: var(--accent); text-decoration-color: color-mix(in srgb, var(--accent) 60%, transparent); }
+a:hover{ text-decoration-color: var(--accent-strong); }
+
+/* Mobile comfort */
+@media (max-width: 640px){
+  html{ font-size: 18px; }
+  .content.container > blockquote{ border-left-width: 2px; }
 }
