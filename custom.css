@@ -5,7 +5,7 @@
 
 /* Design tokens */
 :root{
-  --base-font: 15px;
+  --base-font: 16px;
   --lh: 1.5;
   --measure: 42rem;      /* main column width */
   --max-ch: 62ch;        /* readable line length for text blocks */
@@ -110,38 +110,23 @@ code, pre>code { font-size: .95rem; line-height: 1.45; }
 .content.container p { margin: .65rem 0; }
 
 
-/* --- Epigraph: rhythm-first version --- */
+/* --- Epigraph “floaty” preset --- */
 :root{
-  /* Tune these three numbers */
-  --epi-top: .46rem;          /* more air above */
-  --epi-bottom: .32rem;       /* a hair > inner gap */
-  --epi-inner-gap: .28rem;    /* space between lines inside */
-}
-
-.epigraph{
-  display: flow-root;         /* stop margin collapsing */
-  padding: 0 !important;
-  margin-block-start: var(--epi-top) !important;
-  margin-block-end:   var(--epi-bottom) !important;
+  --epi-top: .54rem;          /* more air above */
+  --epi-bottom: .40rem;       /* clearly > inner gap so it doesn't feel cramped */
+  --epi-inner-gap: .30rem;    /* space between lines inside */
 }
 
 .epigraph blockquote{
-  max-width: 24rem;           /* narrower = lighter */
-  margin: 0 auto !important;  /* outer gap handled on wrapper */
-  border-left: none !important;
-  text-align: center;
-  padding: 0;
+  max-width: 22.5rem;         /* a bit narrower = lighter */
 }
 
 .epigraph blockquote p{
-  margin: 0 0 var(--epi-inner-gap);
-  font-size: 0.98rem;         /* slightly smaller text inside */
-  line-height: 1.46;
-  letter-spacing: 0.004em;
-  opacity: 0.86;              /* softer ink on dark */
+  font-size: 1.03rem;         /* back near body size (not shrunken) */
+  line-height: 1.48;
+  letter-spacing: 0.006em;
+  opacity: 0.84;              /* softer ink keeps it “whispery” */
 }
-.epigraph blockquote p:last-child{ margin-bottom: 0; }
 
-.epigraph + :is(p,blockquote,figure,pre) + :is(ul,ol) {
-  margin-top: .28rem !important;
-}
+/* keep lists tidy if they come right after */
+.epigraph + p + :is(ul,ol){ margin-top: .28rem !important; }
