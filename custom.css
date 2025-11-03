@@ -1,7 +1,7 @@
-/* -------------------------------
+/* -----------------------------------------------------------
    Konish — Tufte overrides (custom.css)
    Works with: tufte.css, dark.css
--------------------------------- */
+------------------------------------------------------------ */
 
 /* Design tokens */
 :root{
@@ -17,13 +17,8 @@
 html { font-size: var(--base-font); }
 body { line-height: var(--lh); }
 
-/* Turn off Tufte's page-wide left padding; center content */
-body.tufte {
-  padding: 0;
-  max-width: none;
-}
-
-/* Centered reading column */
+/* Layout */
+body.tufte { padding: 0; max-width: none; }
 .content.container {
   max-width: var(--measure);
   margin: 0 auto;
@@ -32,7 +27,7 @@ body.tufte {
 
 /* Normalize typography + widths inside the container */
 .content.container :where(p, dl, ol, ul){
-  font-size: inherit !important;   /* make 1.xrem if you want */
+  font-size: inherit !important;      /* allow base size to propagate */
   line-height: var(--lh) !important;
 }
 .content.container :where(p, ul, ol, figure, blockquote p, pre>code){
@@ -40,7 +35,7 @@ body.tufte {
   max-width: var(--max-ch);
 }
 
-/* Headings: calm editorial scale */
+/* Headings */
 h1, h2, h3 { font-weight: 400; }
 h1 { margin: 0 0 1rem; font-size: 2.2rem; line-height: 1.2; }
 h2 { margin: 2rem 0 .8rem; font-size: 1.7rem; }
@@ -49,12 +44,23 @@ h3 { margin: 1.6rem 0 .6rem; font-size: 1.35rem; }
 /* Main-column blockquotes (NOT epigraphs) */
 .content.container > blockquote{
   margin: 0.9rem 0 !important;
-  padding-left: 1.35rem;
+  padding-left: 1.35rem;                       /* space from rule */
   border-left: 4px solid rgba(255,255,255,0.28);
   font-style: italic;
 }
+@media (max-width: 640px){
+  .content.container > blockquote{
+    margin: 0.8rem 0 !important;
+    padding-left: 1.2rem;
+    border-left-width: 3px;
+  }
+}
 
-/* Margin notes (allow short lists) */
+/* Lists + notes rhythm */
+.content.container ul { margin: .6rem 0 0; }
+.content.container li { margin: .25rem 0; }
+.content.container li::marker { font-size: .9em; }
+
 .marginnote, .sidenote { line-height: 1.35; }
 .marginnote.quote { font-style: italic; font-size: .95rem; opacity: .85; }
 .marginnote :where(ul, ol){
@@ -66,68 +72,44 @@ h3 { margin: 1.6rem 0 .6rem; font-size: 1.35rem; }
 }
 .marginnote li + li { margin-top: .25rem; }
 
-/* Lists + markers rhythm */
-.content.container ul { margin: .6rem 0 0; }
-.content.container li { margin: .25rem 0; }
-.content.container li::marker { font-size: .9em; }
-
-/* Baseline + note nudges */
 label.margin-toggle{
   display: inline-block;
   line-height: 1;
-  vertical-align: -.15em;   /* tweak -0.10em ↔ -0.25em to taste */
+  vertical-align: -.15em;
 }
 
-
-label.margin-toggle ~ .marginnote,
-label.margin-toggle ~ .sidenote{
-  transform: translateY(-.20em);
-}
-
-/* Desktop note position */
-@media (min-width: 900px){
-  .marginnote, .sidenote{
-    width: var(--note-width);
-    margin-right: var(--note-offset);
-  }
-}
-
-/* Code sizing */
+/* Code size */
 code, pre>code { font-size: .95rem; line-height: 1.45; }
 
-/* Dark mode polish */
+/* Paragraph margins (guard if tufte bumps globally) */
+.content.container p { margin: .65rem 0; }
+
+/* Dark-mode polish */
 @media (prefers-color-scheme: dark){
   .content.container > blockquote { border-left-color: rgba(255,255,255,.35); }
   .marginnote.quote { opacity: .82; }
 }
 
-/* On narrow screens, keep it comfy */
-@media (max-width: 640px){
-  .content.container > blockquote{
-    margin: 0.8rem 0 !important;
-    padding-left: 1.2rem;
-    border-left-width: 3px;
-  }
+/* ---------------- Epigraph (with soft left rule) ---------------- */
+:root{
+  --epi-top: .36rem;        /* space above epigraph wrapper */
+  --epi-bottom: .28rem;     /* space below epigraph wrapper */
+  --epi-inner-gap: .26rem;  /* gap between lines inside */
 }
 
-/* Paragraph margins (if Tufte bumps them globally) */
-.content.container p { margin: .65rem 0; }
-
-
-/* Epigraph with a soft left rule */
 .epigraph{
-  --epi-top: .36rem;
-  --epi-bottom: .28rem;
-  --epi-inner-gap: .26rem;
+  display: flow-root;                                  /* no margin collapse */
+  margin-block: var(--epi-top) var(--epi-bottom) !important;
+  padding: 0 !important;
 }
 
 .epigraph > blockquote{
   position: relative;
   margin: 0 auto;
   max-width: 23rem;
-  padding-left: 1.25rem;                 /* breathing room from rule */
-  border-left: 3px solid rgba(255,255,255,.22);
-  text-align: left;                      /* reads like a quotation */
+  padding-left: 1.25rem;                               /* breathing room */
+  border-left: 3px solid rgba(255,255,255,.22);        /* soft rule */
+  text-align: left;
 }
 
 .epigraph > blockquote p{
@@ -137,7 +119,6 @@ code, pre>code { font-size: .95rem; line-height: 1.45; }
 }
 .epigraph > blockquote p:last-child{ margin: 0; }
 
-/* Light theme tweak */
 @media (prefers-color-scheme: light){
   .epigraph > blockquote{ border-left-color: rgba(0,0,0,.18); }
 }
