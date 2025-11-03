@@ -1,149 +1,126 @@
-/* ------------------------------------------------------------
+/* -------------------------------
    Konish — Tufte overrides (custom.css)
    Works with: tufte.css, dark.css
-   Goals: readable measure, sane type scale, clean epigraphs,
-          margin notes that behave, and no cramped widths.
-------------------------------------------------------------- */
+-------------------------------- */
 
-/* Base type scale */
-html { font-size: 15px; }        /* ~15px body copy */
-body { line-height: 1.5; }
+/* Design tokens */
+:root{
+  --base-font: 15px;
+  --lh: 1.5;
+  --measure: 42rem;      /* main column width */
+  --max-ch: 62ch;        /* readable line length for text blocks */
+  --note-width: 18rem;   /* sidenote width */
+  --note-offset: -22rem; /* distance from main column */
+}
 
-/* Kill Tufte's page-wide left padding layout; center a column */
+/* Base type */
+html { font-size: var(--base-font); }
+body { line-height: var(--lh); }
+
+/* Turn off Tufte's page-wide left padding; center content */
 body.tufte {
-  width: auto;
-  padding-left: 0;
-  padding-right: 0;
+  padding: 0;
   max-width: none;
 }
 
 /* Centered reading column */
 .content.container {
-  max-width: 42rem;
+  max-width: var(--measure);
   margin: 0 auto;
   padding: 2rem 1.5rem;
 }
 
-/* Normalize paragraph/list sizing (Tufte sets 1.4rem by default) */
-.content.container p,
-.content.container dl,
-.content.container ol,
-.content.container ul {
-  font-size: 1rem !important;    /* 1rem = root (15px) */
-  line-height: 1.5 !important;
+/* Normalize typography + widths inside the container */
+.content.container :where(p, dl, ol, ul){
+  font-size: 1rem !important;   /* override Tufte's larger default */
+  line-height: var(--lh) !important;
 }
-
-/* Undo Tufte's 55% widths inside our container */
-.content.container p,
-.content.container ul,
-.content.container ol,
-.content.container blockquote p,
-.content.container figure,
-.content.container pre > code {
+.content.container :where(p, ul, ol, figure, blockquote p, pre>code){
   width: 100% !important;
-  max-width: 62ch;
+  max-width: var(--max-ch);
 }
 
 /* Headings: calm editorial scale */
-h1 { margin-top: 0; margin-bottom: 1rem; font-size: 2.2rem; line-height: 1.2; font-weight: 400; }
-h2 { font-size: 1.7rem; margin-top: 2rem;  margin-bottom: .8rem; font-weight: 400; }
-h3 { font-size: 1.35rem; margin-top: 1.6rem; margin-bottom: .6rem; font-weight: 400; }
+h1, h2, h3 { font-weight: 400; }
+h1 { margin: 0 0 1rem; font-size: 2.2rem; line-height: 1.2; }
+h2 { margin: 2rem 0 .8rem; font-size: 1.7rem; }
+h3 { margin: 1.6rem 0 .6rem; font-size: 1.35rem; }
 
 /* Main-column blockquotes (NOT epigraphs) */
 .content.container > blockquote {
   margin: 1.25rem 0 !important;
   padding-left: 1rem;
-  border-left: 3px solid rgba(0,0,0,0.25);
+  border-left: 3px solid rgba(0,0,0,.25);
   font-style: italic;
-  opacity: 0.95;
 }
 
 /* Epigraph / thesis question */
-.epigraph blockquote {
+.epigraph { padding: 0 !important; }
+.epigraph blockquote{
   border-left: none !important;
   text-align: center;
   max-width: 26rem;
-  margin: 0.9rem auto 1.1rem;
+  margin: .9rem auto 1.1rem;
   padding: 0;
-  opacity: 1 !important;
 }
-.epigraph blockquote p {
-  margin: 0 0 .6rem 0;
+.epigraph blockquote p{
+  margin: 0 0 .6rem;
   font-size: 1.05rem;
   line-height: 1.42;
   opacity: .88;
 }
-
 /* Tight spacing when epigraph sits between paragraphs */
-p + .epigraph {
-  margin-top: 0.4rem !important;
-}
-.epigraph + p {
-  margin-top: 0.4rem !important;
-}
+p + .epigraph,
+.epigraph + p { margin-top: .4rem !important; }
 
-
-/* Margin notes: style + allow short lists */
+/* Margin notes (allow short lists) */
 .marginnote, .sidenote { line-height: 1.35; }
-.marginnote.quote {
-  font-style: italic;
-  font-size: 0.95rem;
-  opacity: 0.85;
-}
-.marginnote ul,
-.marginnote ol {
-  margin: .4rem 0 0 0;
+.marginnote.quote { font-style: italic; font-size: .95rem; opacity: .85; }
+.marginnote :where(ul, ol){
+  margin: .4rem 0 0;
   padding-left: 1.1rem;
   list-style-position: outside;
-  font-size: 0.9rem;
+  font-size: .9rem;
   line-height: 1.35;
 }
 .marginnote li + li { margin-top: .25rem; }
 
-/* Bring notes closer + align vertically (desktop only) */
-@media (min-width: 900px) {
-  .marginnote, .sidenote {
-    margin-right: -22rem;   /* tweak -21rem ↔ -23rem to taste */
-    width: 18rem;
-    transform: translateY(-0.4rem);
+/* Bring notes closer on desktop */
+@media (min-width: 900px){
+  .marginnote, .sidenote{
+    width: var(--note-width);
+    margin-right: var(--note-offset);
+    transform: translateY(-.4rem);
   }
 }
 
-/* List rhythm under sections */
-.content.container ul { margin: .6rem 0 0 0; }
+/* Lists + markers rhythm */
+.content.container ul { margin: .6rem 0 0; }
 .content.container li { margin: .25rem 0; }
 .content.container li::marker { font-size: .9em; }
 
-/* Margin toggle icon (mobile) */
-label.margin-toggle {
+/* Margin toggle (mobile) */
+label.margin-toggle{
   color: currentColor;
-  opacity: 0.6;
+  opacity: .6;
   margin-left: .25rem;
   font-weight: 600;
 }
 
-/* Code size (slightly smaller than body, but readable) */
-code, pre > code { font-size: 0.95rem; line-height: 1.45; }
+/* Code sizing */
+code, pre>code { font-size: .95rem; line-height: 1.45; }
 
-/* Dark-mode polish */
-@media (prefers-color-scheme: dark) {
-  .content.container > blockquote { border-left-color: rgba(255,255,255,0.35); }
-  .marginnote.quote { opacity: 0.82; }
+/* Dark mode polish */
+@media (prefers-color-scheme: dark){
+  .content.container > blockquote { border-left-color: rgba(255,255,255,.35); }
+  .marginnote.quote { opacity: .82; }
 }
 
-/* Small-screen tweaks: keep padding but let content breathe edge-to-edge */
-@media (max-width: 640px) {
+/* Small screens */
+@media (max-width: 640px){
   .content.container { padding: 1.5rem 1rem; }
   .epigraph blockquote { margin: 1.4rem auto 1.6rem; }
 }
 
-/* Ensure no extra invisible margins inside the epigraph block */
-.epigraph {
-  padding: 0 !important;
-}
-
-/* If Tufte assigns larger margin to paragraphs globally, reduce it here */
-.content.container p {
-  margin-top: 0.65rem;
-  margin-bottom: 0.65rem;
-}
+/* Paragraph margins (if Tufte bumps them globally) */
+.content.container p { margin: .65rem 0; }
