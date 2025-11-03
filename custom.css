@@ -3,6 +3,7 @@
    Works with: tufte.css, dark.css
 ------------------------------------------------------------ */
 @import url('https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap');
 
 /* Design tokens */
 :root{
@@ -25,7 +26,11 @@ body {
 }
 
 /* Make bold actually scan */
-strong, b { font-weight: 650; }  /* Literata variable weight */
+strong, b {
+    font-weight: 650;
+    color: #f4e7c3;
+} 
+/* Literata variable weight */
 em { font-style: italic; }
 
 /* Layout */
@@ -50,6 +55,10 @@ pre > code { font-size: .95rem; line-height: 1.45; }
 }
 
 /* Headings */
+h1, h2, h3,
+.sidenote, .marginnote {
+  font-family: "Inter", sans-serif;
+}
 h1, h2, h3 { font-weight: 600; }
 h1 { letter-spacing: .005em; }   /* tiny tracking helps in dark mode */
 h1 { margin: 0 0 1rem; font-size: 2.2rem; line-height: 1.2; }
