@@ -2,6 +2,7 @@
    Konish — Tufte overrides (custom.css)
    Works with: tufte.css, dark.css
 ------------------------------------------------------------ */
+@import url('https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,300..700&display=swap');
 
 /* Design tokens */
 :root{
@@ -14,8 +15,18 @@
 }
 
 /* Base type */
-html { font-size: var(--base-font) !important;; }
-body { line-height: var(--lh); }
+html { font-size: var(--base-font) !important; }
+body {
+    font-family: "Literata", serif !important;
+    font-optical-sizing: auto;
+    font-synthesis-weight: none;   /* don't fake bold */
+    font-weight: 400;
+    line-height: var(--lh);
+}
+
+/* Make bold actually scan */
+strong, b { font-weight: 650; }  /* Literata variable weight */
+em { font-style: italic; }
 
 /* Layout */
 body.tufte { padding: 0; max-width: none; }
@@ -24,6 +35,9 @@ body.tufte { padding: 0; max-width: none; }
   margin: 0 auto;
   padding: 2rem 1.5rem;
 }
+
+code { font-size: .95rem; line-height: 1.45; }
+pre > code { font-size: .95rem; line-height: 1.45; }
 
 /* Normalize typography + widths inside the container */
 .content.container :where(p, dl, ol, ul){
@@ -36,7 +50,8 @@ body.tufte { padding: 0; max-width: none; }
 }
 
 /* Headings */
-h1, h2, h3 { font-weight: 400; }
+h1, h2, h3 { font-weight: 600; }
+h1 { letter-spacing: .005em; }   /* tiny tracking helps in dark mode */
 h1 { margin: 0 0 1rem; font-size: 2.2rem; line-height: 1.2; }
 h2 { margin: 2rem 0 .8rem; font-size: 1.7rem; }
 h3 { margin: 1.6rem 0 .6rem; font-size: 1.35rem; }
@@ -49,11 +64,17 @@ h3 { margin: 1.6rem 0 .6rem; font-size: 1.35rem; }
   font-style: italic;
 }
 @media (max-width: 640px){
+  html { font-size: 18px !important; }
   .content.container > blockquote{
     margin: 0.8rem 0 !important;
     padding-left: 1.2rem;
     border-left-width: 3px;
   }
+}
+
+/* Dark mode blockquote rule needed a bit more contrast */
+@media (prefers-color-scheme: dark){
+  .content.container > blockquote { border-left-color: rgba(255,255,255,.45); }
 }
 
 /* Lists + notes rhythm */
