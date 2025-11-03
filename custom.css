@@ -64,10 +64,11 @@
   --ink: hsl(40 6% 92%);       /* body text */
   --ink-dim: hsl(28 10% 68%);    /* secondary */
   --rule: hsl(28 8% 28%);        /* separators */
-  --accent: hsl(14 67% 64%);     /* warm emphasis */
+  --accent: hsl(14 55% 78%);     /* warm emphasis */
+  --h3: hsl(14 45% 72%);
   --accent-strong: hsl(14 67% 56%);
-  --title: hsl(38 36% 72%);
-  --bold: hsl(14 52% 58%);
+  --title: hsl(14 60% 85%);
+  --bold: hsl(14 65% 72%);
 
   /* components */
   --blockquote-rule: hsl(28 12% 32%);
@@ -97,7 +98,7 @@ body.tufte {
 
 body.tufte .content.container h1 { color: var(--title); }
 body.tufte .content.container h2 { color: var(--accent); }
-body.tufte .content.container h3 { color: var(--ink); }
+body.tufte .content.container h3 { color: var(--h3); }
 
 
 /* Type families */
