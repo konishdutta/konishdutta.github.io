@@ -5,14 +5,14 @@ layout: default
 
 # Teaching machines chess from first principles
 
-I'm ~1800–1900 in Lichess Rapid, and like many serious hobbyists, I've spent a lot of time thinking about how chess *works*. Tactics are teachable, but to me, strategy and pressure have always felt **vibey**. I know it when I feel it, but explaining *why* it's happening is **hard**.
+I'm ~1800–1900 in Lichess Rapid, and like many serious hobbyists, I've spent a lot of time thinking about how chess *works*. Tactics are teachable, but to me, **strategy and pressure have always felt vibey**. I know it when I feel it, it's *hard to explain why*.
 
 This is why I've always been fascinated with chess engines. The top engines are better than any human is, and I've always wondered:
 
 <div class="epigraph">
   <blockquote>
-    <p><em>Are engines strong because they calculate <b>tactics</b> well...</em></p>
-    <p><em>... or because they have actually learned <b>strategy</b>?</em></p>
+    <p><em>Are engines strong because <b>they calculate tactics</b> well...</em></p>
+    <p><em>... or because <b>they've learned strategy</b>?</em></p>
   </blockquote>
 </div>
 
@@ -35,11 +35,24 @@ There are broadly two ways to train a chess engine:
 2. **Let the machine discover chess for itself.**  
    Just tell the machine the rules of the game and nothing else (no human guidance of what "good" chess is). The machine has to learn chess from first principles. AlphaZero and Leela are trained in this way.
 
-It always felt mystical to me that a machine could see enough games and learn chess better than I've learned it through focused study, and I wanted to replicate that.
+It always felt mystical to me that a machine could see enough games and learn chess better than I've learned it through focused study, and I want to replicate that.
 
-The following is a summary of what I learned while building an **AlphaZero-style neural-network chess engine from scratch**.
+I'm building an **AlphaZero-style neural-network chess engine from scratch**.
 
+This is the first in a series of engineering notes. The goal isn't to show just the result, but to speak to my reasoning in:
 
+- Choosing a representation for the board and pieces
+- Selecting a model
+- Building a search and evaluation function
+- Other decisions I don't know I have to make yet!
+
+I intend the last note to be a look inside the layers of the final model, answering:
+
+<div class="epigraph">
+  <blockquote>
+    <b>What do machines actually learn about chess when humans teach them nothing?</b>
+  </blockquote>
+</div>
 
 ## Project goals
 * 
