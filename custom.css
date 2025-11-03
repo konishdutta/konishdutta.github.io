@@ -64,10 +64,10 @@
   --ink: hsl(40 6% 92%);       /* body text */
   --ink-dim: hsl(28 10% 68%);    /* secondary */
   --rule: hsl(28 8% 28%);        /* separators */
-  --accent: hsl(14 55% 78%);     /* warm emphasis */
-  --h3: hsl(14 45% 72%);
+  --accent: hsl(220 14% 75%);     /* warm emphasis */
+  --h3: hsl(220 12% 68%);
   --accent-strong: hsl(14 67% 56%);
-  --title: hsl(14 60% 85%);
+  --title: hsl(220 15% 82%);
   --bold: hsl(14 65% 72%);
 
   /* components */
