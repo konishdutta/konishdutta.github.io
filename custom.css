@@ -5,7 +5,7 @@
 
 /* Design tokens */
 :root{
-  --base-font: 16px;
+  --base-font: 18px;
   --lh: 1.5;
   --measure: 42rem;      /* main column width */
   --max-ch: 62ch;        /* readable line length for text blocks */
@@ -110,23 +110,23 @@ code, pre>code { font-size: .95rem; line-height: 1.45; }
 .content.container p { margin: .65rem 0; }
 
 
-/* --- Epigraph “floaty” preset --- */
+/* --- Epigraph spacing: tighten the stack --- */
 :root{
-  --epi-top: .54rem;          /* more air above */
-  --epi-bottom: .40rem;       /* clearly > inner gap so it doesn't feel cramped */
-  --epi-inner-gap: .30rem;    /* space between lines inside */
+  --epi-top: .30rem;
+  --epi-bottom: .26rem;
+  --epi-inner-gap: .24rem;
 }
 
+/* reduce the previous paragraph's bottom margin when an epigraph follows */
+.content.container p:has(+ .epigraph){ margin-bottom: .34rem !important; }
+/* fallback if :has isn't supported: squeeze the epigraph's top gap */
+.content.container p + .epigraph{ margin-block-start: .22rem !important; }
+
+/* keep the first paragraph after the epigraph from drifting down */
+.epigraph + p{ margin-top: .22rem !important; }
+
+/* keep the epigraph itself narrow and borderless */
 .epigraph blockquote{
-  max-width: 22.5rem;         /* a bit narrower = lighter */
+  max-width: 23rem;                 /* a touch narrower = floatier */
+  border-left: none !important;     /* ensure no left rule sneaks in */
 }
-
-.epigraph blockquote p{
-  font-size: 1.03rem;         /* back near body size (not shrunken) */
-  line-height: 1.48;
-  letter-spacing: 0.006em;
-  opacity: 0.84;              /* softer ink keeps it “whispery” */
-}
-
-/* keep lists tidy if they come right after */
-.epigraph + p + :is(ul,ol){ margin-top: .28rem !important; }

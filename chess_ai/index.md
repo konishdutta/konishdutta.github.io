@@ -11,8 +11,8 @@ This is why I've always been fascinated with chess engines. The top engines are 
 
 <div class="epigraph">
   <blockquote>
-    <p><em>Are engines strong because they calculate <strong>tactics</strong> well?</em></p>
-    <p><em>Or because they have actually learned <strong>strategy</strong>?</em></p>
+    <p><em>Are engines strong because they calculate <b>tactics</b> well...</em></p>
+    <p><em>... or because they have actually learned <b>strategy</b>?</em></p>
   </blockquote>
 </div>
 
