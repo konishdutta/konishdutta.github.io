@@ -8,12 +8,14 @@ layout: default
 I'm ~1800–1900 in Lichess Rapid, and like many serious hobbyists, I've spent a lot of time thinking about how chess *works*. Tactics are teachable, but strategy and pressure feel more like a **vibe**. I know it when I feel it, but explaining *why* it's happening is **hard**.
 
 This is why I've always been fascinated with chess engines. The top engines are better than any human is, and I've always wondered:
+
 <div class="epigraph">
   <blockquote>
     <p><em>Are engines strong because they calculate <strong>tactics</strong> well?</em></p>
     <p><em>Or because they have actually learned <strong>strategy</strong>?</em></p>
   </blockquote>
 </div>
+
 There are broadly two ways to train a chess engine:
 
 1. **Teach the engine "good" chess.**  

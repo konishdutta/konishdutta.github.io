@@ -19,7 +19,7 @@ body.tufte {
 
 /* Centered reading column */
 .content.container {
-  max-width: 42rem;              /* ~70–75 chars */
+  max-width: 42rem;
   margin: 0 auto;
   padding: 2rem 1.5rem;
 }
@@ -41,7 +41,7 @@ body.tufte {
 .content.container figure,
 .content.container pre > code {
   width: 100% !important;
-  max-width: 62ch;               /* a touch denser than 65ch */
+  max-width: 62ch;
 }
 
 /* Headings: calm editorial scale */
@@ -63,7 +63,7 @@ h3 { font-size: 1.35rem; margin-top: 1.6rem; margin-bottom: .6rem; font-weight: 
   border-left: none !important;
   text-align: center;
   max-width: 26rem;
-  margin: 0.9rem auto 1.1rem; /* MUCH tighter */
+  margin: 0.9rem auto 1.1rem;
   padding: 0;
   opacity: 1 !important;
 }
@@ -74,10 +74,14 @@ h3 { font-size: 1.35rem; margin-top: 1.6rem; margin-bottom: .6rem; font-weight: 
   opacity: .88;
 }
 
-/* Collapse vertical spacing when epigraph follows a paragraph */
-p + .epigraph blockquote {
-  margin-top: 0.6rem; /* used to be ~2rem */
+/* Tight spacing when epigraph sits between paragraphs */
+p + .epigraph {
+  margin-top: 0.4rem !important;
 }
+.epigraph + p {
+  margin-top: 0.4rem !important;
+}
+
 
 /* Margin notes: style + allow short lists */
 .marginnote, .sidenote { line-height: 1.35; }
@@ -131,4 +135,15 @@ code, pre > code { font-size: 0.95rem; line-height: 1.45; }
 @media (max-width: 640px) {
   .content.container { padding: 1.5rem 1rem; }
   .epigraph blockquote { margin: 1.4rem auto 1.6rem; }
+}
+
+/* Ensure no extra invisible margins inside the epigraph block */
+.epigraph {
+  padding: 0 !important;
+}
+
+/* If Tufte assigns larger margin to paragraphs globally, reduce it here */
+.content.container p {
+  margin-top: 0.65rem;
+  margin-bottom: 0.65rem;
 }
