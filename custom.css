@@ -66,7 +66,7 @@
   --rule: hsl(28 8% 28%);        /* separators */
   --accent: hsl(14 67% 64%);     /* warm emphasis */
   --accent-strong: hsl(14 67% 56%);
-  --title: hsl(18 55% 56%);
+  --title: hsl(38 36% 72%);
   --bold: hsl(14 52% 58%);
 
   /* components */
@@ -99,6 +99,7 @@ body.tufte .content.container h1 { color: var(--title); }
 body.tufte .content.container h2 { color: var(--accent); }
 body.tufte .content.container h3 { color: var(--ink); }
 
+
 /* Type families */
 body{
   font-family: "Literata", serif;
@@ -121,19 +122,34 @@ h1,h2,h3,.sidenote,.marginnote{
   max-width: var(--max-ch);
 }
 
-/* -------- Hierarchy -------- */
-h1,h2,h3{
-    letter-spacing: .003em;
+/* Headings: size/weight/spacing only (no color here) */
+h1,h2,h3{ letter-spacing:.003em; }
+h1{ font-weight:800; font-size:2.25rem; line-height:1.2; margin:0 0 1rem; }
+h2{ font-weight:700; font-size:1.6rem;  margin:1.9rem 0 .8rem; }
+h3{ font-weight:700; font-size:1.25rem; margin:1.3rem 0 .6rem; }
+
+/* Headings with links inherit color + nicer hover */
+h1 a, h2 a, h3 a { color: inherit; text-decoration: none; }
+h1 a:hover, h2 a:hover, h3 a:hover { text-decoration: underline; }
+
+/* Link hover is visibly stronger */
+a { 
+  color: var(--accent);
+  text-decoration-color: color-mix(in srgb, var(--accent) 60%, transparent);
 }
-h1{ font-weight:800;font-size: 2.25rem; line-height: 1.2; margin: 0 0 1rem; color: var(--accent-strong); }
-h2{ font-weight:700;font-size: 1.6rem; margin: 1.9rem 0 .8rem; color: var(--accent); }
-h3{ font-weight:700;font-size: 1.25rem; margin: 1.3rem 0 .6rem; color: var(--ink); }
+a:hover { 
+  color: var(--accent-strong);
+  text-decoration-color: var(--accent-strong);
+}
 
 /* Emphasis */
-strong, b{ font-weight: 650;
-    font-family: "Sohne", "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-    color: var(--bold) !important;
+strong,b{
+  font-family:"Sohne",system-ui,sans-serif;
+  font-weight:700;
+  color:var(--bold);
+  letter-spacing:.003em;
 }
+
 em{ font-style: italic; }
 
 /* Paragraph rhythm */
@@ -202,10 +218,6 @@ hr{
 .content.container .epigraph + :is(p,ul,ol,blockquote,figure,pre,hr,h2,h3,h4){
   margin-top: var(--epi-bottom) !important;
 }
-
-/* Links — soft, not neon */
-a{ color: var(--accent); text-decoration-color: color-mix(in srgb, var(--accent) 60%, transparent); }
-a:hover{ text-decoration-color: var(--accent-strong); }
 
 /* Mobile comfort */
 @media (max-width: 640px){
