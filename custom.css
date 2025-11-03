@@ -32,7 +32,7 @@
   --rule: hsl(28 8% 28%);        /* separators */
   --accent: hsl(14 67% 64%);     /* warm emphasis */
   --accent-strong: hsl(14 67% 64%);
-  --title: hsl(10 70% 70%);
+  --title: hsl(38 36% 72%);
   --bold: hsl(14 67% 64%);
 
   /* components */
@@ -71,6 +71,7 @@ body{
 }
 h1,h2,h3,.sidenote,.marginnote{
   font-family: "Sohne", "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: var(--title);
 }
 
 /* Normalize typography inside the container */
@@ -84,13 +85,17 @@ h1,h2,h3,.sidenote,.marginnote{
 }
 
 /* -------- Hierarchy -------- */
-h1,h2,h3{ font-weight: 600; letter-spacing: .003em; }
+h1,h2,h3{ font-weight: 600; letter-spacing: .003em;
+
+}
 h1{ font-size: 2.25rem; line-height: 1.2; margin: 0 0 1rem; color: var(--accent-strong); }
 h2{ font-size: 1.6rem; margin: 1.9rem 0 .8rem; color: var(--accent); }
 h3{ font-size: 1.25rem; margin: 1.3rem 0 .6rem; color: var(--ink); }
 
 /* Emphasis */
-strong, b{ font-weight: 650; }
+strong, b{ font-weight: 650;
+color: var(--bold) !important;
+}
 em{ font-style: italic; }
 
 /* Paragraph rhythm */
