@@ -60,18 +60,22 @@ h3 { margin: 1.6rem 0 .6rem; font-size: 1.35rem; }
   border-left: none !important;
   text-align: center;
   max-width: 26rem;
-  margin: .9rem auto 1.1rem;
+  margin: .25rem auto .45rem;
   padding: 0;
 }
 .epigraph blockquote p{
-  margin: 0 0 .6rem;
+  margin: 0 0 .3rem;
   font-size: 1.05rem;
   line-height: 1.42;
   opacity: .88;
 }
+
+.epigraph blockquote p:last-child { margin-bottom: 0; }
+
+
 /* Tight spacing when epigraph sits between paragraphs */
 p + .epigraph,
-.epigraph + p { margin-top: .4rem !important; }
+.epigraph + p { margin-top: .25rem !important; }
 
 /* Margin notes (allow short lists) */
 .marginnote, .sidenote { line-height: 1.35; }
@@ -85,26 +89,30 @@ p + .epigraph,
 }
 .marginnote li + li { margin-top: .25rem; }
 
-/* Bring notes closer on desktop */
-@media (min-width: 900px){
-  .marginnote, .sidenote{
-    width: var(--note-width);
-    margin-right: var(--note-offset);
-    transform: translateY(-.4rem);
-  }
-}
-
 /* Lists + markers rhythm */
 .content.container ul { margin: .6rem 0 0; }
 .content.container li { margin: .25rem 0; }
 .content.container li::marker { font-size: .9em; }
 
-/* Margin toggle (mobile) */
+/* Baseline + note nudges */
 label.margin-toggle{
-  color: currentColor;
-  opacity: .6;
-  margin-left: .25rem;
-  font-weight: 600;
+  display: inline-block;
+  line-height: 1;
+  vertical-align: -.15em;   /* tweak -0.10em ↔ -0.25em to taste */
+}
+
+
+label.margin-toggle + input.margin-toggle + .marginnote,
+label.margin-toggle + input.margin-toggle + .sidenote{
+  transform: translateY(-.20em);
+}
+
+/* Desktop note position */
+@media (min-width: 900px){
+  .marginnote, .sidenote{
+    width: var(--note-width);
+    margin-right: var(--note-offset);
+  }
 }
 
 /* Code sizing */
@@ -119,7 +127,7 @@ code, pre>code { font-size: .95rem; line-height: 1.45; }
 /* Small screens */
 @media (max-width: 640px){
   .content.container { padding: 1.5rem 1rem; }
-  .epigraph blockquote { margin: 1.4rem auto 1.6rem; }
+  .epigraph blockquote { margin: .25rem auto .45rem; } /* was 1.4 / 1.6 */
 }
 
 /* Paragraph margins (if Tufte bumps them globally) */
