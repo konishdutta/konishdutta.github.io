@@ -6,12 +6,46 @@
 
 /* Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,300..700&family=Inter:wght@500;600;700&display=swap');
-@font-face {
-  font-family: "Sohne";
-  src: url("/Sohne-Buch/Sohne-Buch.woff") format("woff");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
+/* Regular */
+@font-face{
+  font-family:"Sohne";
+  src: url("/Sohne-Buch/Sohne-Buch.woff2") format("woff2"),
+       url("/Sohne-Buch/Sohne-Buch.woff") format("woff");
+  font-weight:400; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:"Sohne";
+  src: url("/Sohne-Buch/Sohne-BuchKursiv.woff2") format("woff2"),
+       url("/Sohne-Buch/Sohne-BuchKursiv.woff") format("woff");
+  font-weight:400; font-style:italic; font-display:swap;
+}
+
+/* Bold */
+@font-face{
+  font-family:"Sohne";
+  src: url("/Sohne-Buch/Sohne-Kraftig.woff2") format("woff2"),
+       url("/Sohne-Buch/Sohne-Kraftig.woff") format("woff");
+  font-weight:700; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:"Sohne";
+  src: url("/Sohne-Buch/Sohne-KraftigKursiv.woff2") format("woff2"),
+       url("/Sohne-Buch/Sohne-KraftigKursiv.woff") format("woff");
+  font-weight:700; font-style:italic; font-display:swap;
+}
+
+/* Extra Bold (optional, for H1s) */
+@font-face{
+  font-family:"Sohne";
+  src: url("/Sohne-Buch/Sohne-Dreiviertelfett.woff2") format("woff2"),
+       url("/Sohne-Buch/Sohne-Dreiviertelfett.woff") format("woff");
+  font-weight:800; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:"Sohne";
+  src: url("/Sohne-Buch/Sohne-DreiviertelfettKursiv.woff2") format("woff2"),
+       url("/Sohne-Buch/Sohne-DreiviertelfettKursiv.woff") format("woff");
+  font-weight:800; font-style:italic; font-display:swap;
 }
 
 
@@ -31,9 +65,9 @@
   --ink-dim: hsl(28 10% 68%);    /* secondary */
   --rule: hsl(28 8% 28%);        /* separators */
   --accent: hsl(14 67% 64%);     /* warm emphasis */
-  --accent-strong: hsl(14 67% 64%);
+  --accent-strong: hsl(14 67% 56%);
   --title: hsl(18 55% 56%);
---bold: hsl(14 52% 58%);
+  --bold: hsl(14 52% 58%);
 
   /* components */
   --blockquote-rule: hsl(28 12% 32%);
@@ -61,6 +95,10 @@ body.tufte {
   padding: 2rem 1.5rem;
 }
 
+body.tufte .content.container h1 { color: var(--title); }
+body.tufte .content.container h2 { color: var(--accent); }
+body.tufte .content.container h3 { color: var(--ink); }
+
 /* Type families */
 body{
   font-family: "Literata", serif;
@@ -84,14 +122,12 @@ h1,h2,h3,.sidenote,.marginnote{
 }
 
 /* -------- Hierarchy -------- */
-h1,h2,h3{ font-weight: 600;
+h1,h2,h3{
     letter-spacing: .003em;
-      color: var(--title) !important;
-
 }
-h1{ font-size: 2.25rem; line-height: 1.2; margin: 0 0 1rem; color: var(--accent-strong); }
-h2{ font-size: 1.6rem; margin: 1.9rem 0 .8rem; color: var(--accent); }
-h3{ font-size: 1.25rem; margin: 1.3rem 0 .6rem; color: var(--ink); }
+h1{ font-weight:800;font-size: 2.25rem; line-height: 1.2; margin: 0 0 1rem; color: var(--accent-strong); }
+h2{ font-weight:700;font-size: 1.6rem; margin: 1.9rem 0 .8rem; color: var(--accent); }
+h3{ font-weight:700;font-size: 1.25rem; margin: 1.3rem 0 .6rem; color: var(--ink); }
 
 /* Emphasis */
 strong, b{ font-weight: 650;
