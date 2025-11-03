@@ -14,7 +14,7 @@
 }
 
 /* Base type */
-html { font-size: var(--base-font); }
+html { font-size: var(--base-font) !important;; }
 body { line-height: var(--lh); }
 
 /* Layout */
@@ -92,9 +92,9 @@ code, pre>code { font-size: .95rem; line-height: 1.45; }
 
 /* --- Clamp epigraph spacing at the wrapper, kill inner margins --- */
 :root{
-  --epi-top: .22rem;         /* space above the whole epigraph */
-  --epi-bottom: .22rem;      /* space below the whole epigraph */
-  --epi-inner-gap: .24rem;   /* line gap inside the quote */
+  --epi-top: .55rem;         /* space above the whole epigraph */
+  --epi-bottom: .38rem;      /* space below the whole epigraph */
+  --epi-inner-gap: .28rem;   /* line gap inside the quote */
 }
 
 .content.container .epigraph{
