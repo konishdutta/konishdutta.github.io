@@ -9,8 +9,7 @@
 html { font-size: 15px; }        /* ~15px body copy */
 body { line-height: 1.5; }
 
-/* Kill Tufte's page-wide left padding layout;
-   we'll center a readable column instead. */
+/* Kill Tufte's page-wide left padding layout; center a column */
 body.tufte {
   width: auto;
   padding-left: 0;
@@ -34,7 +33,7 @@ body.tufte {
   line-height: 1.5 !important;
 }
 
-/* Undo Tufte's 55% column widths inside our container */
+/* Undo Tufte's 55% widths inside our container */
 .content.container p,
 .content.container ul,
 .content.container ol,
@@ -59,33 +58,33 @@ h3 { font-size: 1.35rem; margin-top: 1.6rem; margin-bottom: .6rem; font-weight: 
   opacity: 0.95;
 }
 
-/* Epigraph / thesis question: centered, no border (tighter + smaller) */
+/* Epigraph / thesis question */
 .epigraph blockquote {
   border-left: none !important;
   text-align: center;
-  max-width: 26rem;         /* was 30–32rem → narrower */
-  margin: 1.4rem auto 1.8rem;
+  max-width: 26rem;
+  margin: 0.9rem auto 1.1rem; /* MUCH tighter */
   padding: 0;
   opacity: 1 !important;
 }
-
 .epigraph blockquote p {
-  margin: 0 0 .7rem 0;
+  margin: 0 0 .6rem 0;
   font-size: 1.05rem;
   line-height: 1.42;
   opacity: .88;
 }
 
-/* Margin notes: style + allow short lists */
-.marginnote, .sidenote {
-  transform: translateY(-0.4rem);
-  line-height: 1.35;  
+/* Collapse vertical spacing when epigraph follows a paragraph */
+p + .epigraph blockquote {
+  margin-top: 0.6rem; /* used to be ~2rem */
 }
+
+/* Margin notes: style + allow short lists */
+.marginnote, .sidenote { line-height: 1.35; }
 .marginnote.quote {
   font-style: italic;
   font-size: 0.95rem;
   opacity: 0.85;
-  transform: translateY(-.2rem);
 }
 .marginnote ul,
 .marginnote ol {
@@ -97,14 +96,15 @@ h3 { font-size: 1.35rem; margin-top: 1.6rem; margin-bottom: .6rem; font-weight: 
 }
 .marginnote li + li { margin-top: .25rem; }
 
-/* Bring notes closer + align vertically */
+/* Bring notes closer + align vertically (desktop only) */
 @media (min-width: 900px) {
   .marginnote, .sidenote {
-    margin-right: -22rem;   /* was -24rem */
+    margin-right: -22rem;   /* tweak -21rem ↔ -23rem to taste */
     width: 18rem;
     transform: translateY(-0.4rem);
   }
 }
+
 /* List rhythm under sections */
 .content.container ul { margin: .6rem 0 0 0; }
 .content.container li { margin: .25rem 0; }
