@@ -6,6 +6,14 @@
 
 /* Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,300..700&family=Inter:wght@500;600;700&display=swap');
+@font-face {
+  font-family: "Sohne";
+  src: url("/Sohne-Buch/Sohne-Buch.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 
 /* ---------------- Tokens ---------------- */
 :root{
@@ -19,11 +27,13 @@
 
   /* palette (warm, low-chroma) */
   --bg: hsl(26 12% 8%);          /* page bg */
-  --ink: hsl(28 12% 83%);        /* body text */
+  --ink: hsl(40 6% 92%);       /* body text */
   --ink-dim: hsl(28 10% 68%);    /* secondary */
   --rule: hsl(28 8% 28%);        /* separators */
-  --accent: hsl(35 28% 78%);     /* warm emphasis */
+  --accent: hsl(14 67% 64%);     /* warm emphasis */
   --accent-strong: hsl(35 38% 82%);
+  --title: hsl(10 70% 70%);
+  --bold: hsl(48 70% 78%);
 
   /* components */
   --blockquote-rule: hsl(28 12% 32%);
@@ -60,7 +70,7 @@ body{
   font-synthesis-weight: none;   /* don't fake bold */
 }
 h1,h2,h3,.sidenote,.marginnote{
-  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-family: "Sohne", "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
 }
 
 /* Normalize typography inside the container */
@@ -80,7 +90,7 @@ h2{ font-size: 1.6rem; margin: 1.9rem 0 .8rem; color: var(--accent); }
 h3{ font-size: 1.25rem; margin: 1.3rem 0 .6rem; color: var(--ink); }
 
 /* Emphasis */
-strong, b{ font-weight: 650; color: var(--accent-strong); }
+strong, b{ font-weight: 650; }
 em{ font-style: italic; }
 
 /* Paragraph rhythm */
