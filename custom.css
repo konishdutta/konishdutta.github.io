@@ -54,7 +54,7 @@
   /* scale */
   --base-font: 19px;
   --lh: 1.62;
-  --measure: 42rem;      /* main column width */
+  --measure: 38rem;      /* main column width */
   --max-ch: 62ch;        /* readable line length */
   --note-width: 18rem;   /* sidenote width */
   --note-offset: -22rem; /* distance from main column */
@@ -126,8 +126,8 @@ h1,h2,h3,.sidenote,.marginnote{
 /* Headings: size/weight/spacing only (no color here) */
 h1,h2,h3{ letter-spacing:.003em; }
 h1{ font-weight:800; font-size:2.25rem; line-height:1.2; margin:0 0 1rem; }
-h2{ font-style: bold; font-weight:800; font-size:1.6rem;  margin:1.9rem 0 .8rem; }
-h3{ font-style: bold; font-weight:800; font-size:1.25rem; margin:1.3rem 0 .6rem; }
+h2{ font-weight:800; font-size:1.7rem;  margin:2rem 0 .9rem; }
+h3{ font-weight:700; font-size:1.22rem; margin:1.2rem 0 .6rem; }
 
 /* Headings with links inherit color + nicer hover */
 h1 a, h2 a, h3 a { color: inherit; text-decoration: none; }
@@ -154,7 +154,7 @@ strong,b{
 em{ font-style: italic; }
 
 /* Paragraph rhythm */
-.content.container p{ margin: .7rem 0; }
+.content.container p{ margin: .9rem 0; }
 
 /* Lists */
 .content.container ul{ margin: .6rem 0 0; }
@@ -172,9 +172,10 @@ em{ font-style: italic; }
 
 /* Sidenotes / margin notes */
 .sidenote, .marginnote{
-  font-size: .92rem;
-  line-height: 1.4;
+  font-size: .9rem;
+  line-height: 1.42;
   color: var(--ink-dim);
+  opacity: .82;
 }
 label.margin-toggle{ display:inline-block; line-height:1; vertical-align:-.15em; }
 
@@ -187,12 +188,14 @@ pre{
   border-radius: .6rem;
 }
 
-/* Rules / hr */
-hr{
-  border: 0;
-  height: 1px;
-  background: linear-gradient(to right, transparent, var(--rule), transparent);
-  margin: 1.5rem 0;
+
+/* 7) Micro-polish: make hr a hair lighter + nicer selection */
+hr { background: linear-gradient(to right, transparent, color-mix(in srgb, var(--rule) 85%, transparent), transparent); }
+::selection { background: color-mix(in srgb, var(--accent) 35%, white); color: black; }
+
+/* 8) Modern wrapping (graceful ragged edges without hyphenation) */
+@supports (text-wrap: pretty) {
+  .content.container { text-wrap: pretty; }
 }
 
 /* Epigraphs */

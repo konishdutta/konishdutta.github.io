@@ -23,7 +23,7 @@ I'm ~1800–1900 in Lichess Rapid, and like many serious hobbyists, I've spent a
    <label for="mn-1" class="margin-toggle">⊕</label>
    <input type="checkbox" id="mn-1" class="margin-toggle"/>
    <span class="marginnote quote">
-     In Approach 1, the engine doesn't *discover* strategy; instead it applies strategies that humans empower it with.
+     In Approach 1, the machine never discovers chess; it just applies human ideas faster than humans can.
    </span>
 
    Some heuristics we can encode:
@@ -53,7 +53,7 @@ I intend the last note to be a look inside the layers of the final model, answer
 </div>
 
 ## High-level architecture and plan
-I'm picking some default decisions based on my initial review of the existing literature
+I'm picking some default decisions based on my initial review of the existing literature.
    <label for="mn-1" class="margin-toggle">⊕</label>
    <input type="checkbox" id="mn-1" class="margin-toggle"/>
    <span class="marginnote quote">
