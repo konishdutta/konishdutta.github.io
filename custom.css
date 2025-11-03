@@ -31,9 +31,9 @@
   --ink-dim: hsl(28 10% 68%);    /* secondary */
   --rule: hsl(28 8% 28%);        /* separators */
   --accent: hsl(14 67% 64%);     /* warm emphasis */
-  --accent-strong: hsl(35 38% 82%);
+  --accent-strong: hsl(14 67% 64%);
   --title: hsl(10 70% 70%);
-  --bold: hsl(48 70% 78%);
+  --bold: hsl(14 67% 64%);
 
   /* components */
   --blockquote-rule: hsl(28 12% 32%);
