@@ -5,7 +5,7 @@
 
 /* Design tokens */
 :root{
-  --base-font: 18px;
+  --base-font: 16px;
   --lh: 1.5;
   --measure: 42rem;      /* main column width */
   --max-ch: 62ch;        /* readable line length for text blocks */
@@ -32,7 +32,7 @@ body.tufte {
 
 /* Normalize typography + widths inside the container */
 .content.container :where(p, dl, ol, ul){
-  font-size: 1rem !important;   /* override Tufte's larger default */
+  font-size: inherit !important;   /* make 1.xrem if you want */
   line-height: var(--lh) !important;
 }
 .content.container :where(p, ul, ol, figure, blockquote p, pre>code){
@@ -47,10 +47,10 @@ h2 { margin: 2rem 0 .8rem; font-size: 1.7rem; }
 h3 { margin: 1.6rem 0 .6rem; font-size: 1.35rem; }
 
 /* Main-column blockquotes (NOT epigraphs) */
-.content.container > blockquote {
-  margin: 1.25rem 0 !important;
-  padding-left: 1rem;
-  border-left: 3px solid rgba(0,0,0,.25);
+.content.container > blockquote{
+  margin: 0.9rem 0 !important;
+  padding-left: 1.35rem;
+  border-left: 4px solid rgba(255,255,255,0.28);
   font-style: italic;
 }
 
@@ -101,32 +101,43 @@ code, pre>code { font-size: .95rem; line-height: 1.45; }
   .marginnote.quote { opacity: .82; }
 }
 
-/* Small screens */
+/* On narrow screens, keep it comfy */
 @media (max-width: 640px){
-  .content.container { padding: 1.5rem 1rem; }
+  .content.container > blockquote{
+    margin: 0.8rem 0 !important;
+    padding-left: 1.2rem;
+    border-left-width: 3px;
+  }
 }
 
 /* Paragraph margins (if Tufte bumps them globally) */
 .content.container p { margin: .65rem 0; }
 
 
-/* --- Epigraph spacing: tighten the stack --- */
-:root{
-  --epi-top: .30rem;
-  --epi-bottom: .26rem;
-  --epi-inner-gap: .24rem;
+/* Epigraph with a soft left rule */
+.epigraph{
+  --epi-top: .36rem;
+  --epi-bottom: .28rem;
+  --epi-inner-gap: .26rem;
 }
 
-/* reduce the previous paragraph's bottom margin when an epigraph follows */
-.content.container p:has(+ .epigraph){ margin-bottom: .34rem !important; }
-/* fallback if :has isn't supported: squeeze the epigraph's top gap */
-.content.container p + .epigraph{ margin-block-start: .22rem !important; }
+.epigraph > blockquote{
+  position: relative;
+  margin: 0 auto;
+  max-width: 23rem;
+  padding-left: 1.25rem;                 /* breathing room from rule */
+  border-left: 3px solid rgba(255,255,255,.22);
+  text-align: left;                      /* reads like a quotation */
+}
 
-/* keep the first paragraph after the epigraph from drifting down */
-.epigraph + p{ margin-top: .22rem !important; }
+.epigraph > blockquote p{
+  margin: 0 0 var(--epi-inner-gap);
+  font-style: italic;
+  opacity: .88;
+}
+.epigraph > blockquote p:last-child{ margin: 0; }
 
-/* keep the epigraph itself narrow and borderless */
-.epigraph blockquote{
-  max-width: 23rem;                 /* a touch narrower = floatier */
-  border-left: none !important;     /* ensure no left rule sneaks in */
+/* Light theme tweak */
+@media (prefers-color-scheme: light){
+  .epigraph > blockquote{ border-left-color: rgba(0,0,0,.18); }
 }
