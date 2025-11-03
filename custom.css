@@ -63,20 +63,24 @@ h3 { font-size: 1.35rem; margin-top: 1.6rem; margin-bottom: .6rem; font-weight: 
 .epigraph blockquote {
   border-left: none !important;
   text-align: center;
-  max-width: 30rem;
-  margin: 1.6rem auto 1.8rem;
+  max-width: 26rem;         /* was 30–32rem → narrower */
+  margin: 1.4rem auto 1.8rem;
   padding: 0;
   opacity: 1 !important;
 }
+
 .epigraph blockquote p {
-  margin: 0 0 .8rem 0;
+  margin: 0 0 .7rem 0;
   font-size: 1.05rem;
-  line-height: 1.45;
-  opacity: .9;
+  line-height: 1.42;
+  opacity: .88;
 }
 
 /* Margin notes: style + allow short lists */
-.marginnote, .sidenote { line-height: 1.35; }
+.marginnote, .sidenote {
+  transform: translateY(-0.4rem);
+  line-height: 1.35;  
+}
 .marginnote.quote {
   font-style: italic;
   font-size: 0.95rem;
@@ -93,11 +97,14 @@ h3 { font-size: 1.35rem; margin-top: 1.6rem; margin-bottom: .6rem; font-weight: 
 }
 .marginnote li + li { margin-top: .25rem; }
 
-/* Bring notes a bit closer on wide screens (tweak -23rem ↔ -26rem to taste) */
+/* Bring notes closer + align vertically */
 @media (min-width: 900px) {
-  .marginnote, .sidenote { margin-right: -24rem; width: 18rem; }
+  .marginnote, .sidenote {
+    margin-right: -22rem;   /* was -24rem */
+    width: 18rem;
+    transform: translateY(-0.4rem);
+  }
 }
-
 /* List rhythm under sections */
 .content.container ul { margin: .6rem 0 0 0; }
 .content.container li { margin: .25rem 0; }
