@@ -53,7 +53,15 @@ I intend the last note to be a look inside the layers of the final model, answer
 </div>
 
 ## High-level architecture and plan
-todo...
+I'm picking some default decisions based on my initial review of the existing literature
+   <label for="mn-1" class="margin-toggle">⊕</label>
+   <input type="checkbox" id="mn-1" class="margin-toggle"/>
+   <span class="marginnote quote">
+   Some important literature that helped me get started: <a href="https://www.science.org/doi/10.1126/science.aar6404" target="_blank">
+        Silver et al. (2018), *A general reinforcement learning algorithm that masters chess, shogi, and Go through self-play*
+    </a>, <a href="https://www.nature.com/articles/s41586-020-03051-4">Schrittwieser et al. (2020), *Mastering Atari, Go, chess and shogi by planning with a learned model*</a>, and <a href="https://lczero.org/dev/old/nn/">LeelaZero dev docs</a>.
+   </span>
+
 
 ## Memos
 1. (Coming Soon) Board Representation
