@@ -81,4 +81,4 @@ I'm picking some default decisions based on my initial review of the existing li
     </a>, <a href="https://www.nature.com/articles/s41586-020-03051-4">Schrittwieser et al. (2020), *Mastering Atari, Go, chess and shogi by planning with a learned model*</a>, and <a href="https://lczero.org/dev/old/nn/">LeelaZero dev docs</a>.
    </span>
 
-Next, read about how I [board_tensor.html](designed the board tensor) for my model.
+Next, read about how I [designed the board tensor](board_tensor.html) for my model.

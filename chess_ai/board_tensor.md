@@ -9,6 +9,8 @@ sidebar_links:
 
 # Designing the board tensor
 
+[Start here](index.html) for the first article in the series.
+
 In order for my model to learn to play good chess, I must give it a **representation of a board** as an input. Since chess is played on an 8x8 board, why not just represent my board as an 8x8 array?
 
 The problem is that the board consists of different pieces (pawns, bishops, knights, rooks, queen, king). How should I tell my model about these pieces?
@@ -29,6 +31,7 @@ If we were to encode it with the above logic, we'd get an 8x8 matrix that looks 
 
 Since we'll pass a tensor into our CNN, we can have **multiple channels**. Consider this design that overcomes the above problems. We have **25 channels** (I'll also refer to these as planes sometimes) that are each 8x8 arrays (so the tensor shape is `[25, 8, 8]`):
 * **Each piece is represented on a different channel**. As seen in the snippet below, `tensor[0:12]` represent the position of a single piece. We use one-hot encoding, so the value is 1 if the piece is on that square, 0 otherwise.
+
 ```python
 _PIECE_PLANES = {
     (chess.PAWN, chess.WHITE): 0,
@@ -44,9 +47,7 @@ _PIECE_PLANES = {
     (chess.QUEEN, chess.BLACK): 10,
     (chess.KING, chess.BLACK): 11
 }
-
-# later...
-
+    # later...
     # Create the 12 position planes
     for square, piece in board.piece_map().items():
         # look up the plane
@@ -54,8 +55,10 @@ _PIECE_PLANES = {
         row, col =  get_rc_from_square(square)
         res[plane, row, col] = 1.0
 ```
+
 * **`tensor[12]` tells us whose turn it is.** It is an 8x8 array that is 1 if it's White's turns and 0 if it's Black.
 * **`tensor[13:17]` consists of castling rights.** So if white has kingside castling rights, the entire 8x8 channel is 1, else it's 0. These 4 channels are 8x8 arrays that are either all 0s or 1s. 
+
 ```python
     # set the castling planes
     if board.has_kingside_castling_rights(chess.WHITE):
@@ -67,7 +70,9 @@ _PIECE_PLANES = {
     if board.has_queenside_castling_rights(chess.BLACK):
         res[16, :, :] = 1.0
 ```
+
 * **`tensor[17:25]` contains en-passant rules** Similar to above, these 8 channels represent each of the 8 files and tells us whether that file has an en-passant move available.
+
 ```python
     # en passant planes
     # only one file can be true at once
@@ -75,8 +80,11 @@ _PIECE_PLANES = {
         ep_file = chess.square_file(board.ep_square)
         res[17+ep_file, :, :] = 1.0
 ```
+
 ## Visualizing our final tensor design
+
 So how does the Levitsky-Marshall move look?
+
 ![Levitsky-Marshall (1912) Tensor](assets/chess_tensor_design.png "Levitsky-Marshall (1912) Tensor")
 
 We've successfully encoded all the details of the game state (position info, turn info, castling, en-passant). The **downside** of this approach is we are using a lot of space to represent turn info and other rules. In these cases, we are making the entire matrix of 64 numbers either 1 or 0 instead of representing it as a single bit.
