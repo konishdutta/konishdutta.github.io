@@ -16,9 +16,11 @@ The problem is that the board consists of different pieces (pawns, bishops, knig
 Since there are 6 pieces, I could pick 1 for pawn, 2 for bishop, 3 for knight, 4 for rook, 5 for queen, 6 for king. And I could make this negative for the black pieces. 0 could mean there are no pieces there.
 
 Consider this position from Levitsky-Marshall (1912):
-![Levitsky-Marshall (1912)](assets/levitsky_marshall.PNG "Levitsky-Marshall (1912)")
+
+![Levitsky-Marshall (1912)](assets/levitsky_marshall.png "Levitsky-Marshall (1912)")
 
 If we were to encode it with the above logic, we'd get an 8x8 matrix that looks like this:
+
 ![Naive tensor](assets/naive_tensor.PNG "Naive tensor")
 
 Why doesn't this work?
