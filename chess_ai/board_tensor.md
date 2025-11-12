@@ -3,8 +3,8 @@ title: Designing the board tensor
 layout: default
 sidebar_title: "Contents"
 sidebar_links:
-  - { title: "Teaching machines to beat me in chess", url: "chess_ai/index.md" }
-  - { title: "Designing the board tensor", url: "chess_ai/board_tensor.md" }
+  - { title: "Teaching machines to beat me in chess", url: "chess_ai/index.html" }
+  - { title: "Designing the board tensor", url: "chess_ai/board_tensor.html" }
 ---
 
 # Designing the board tensor
@@ -23,76 +23,64 @@ If we were to encode it with the above logic, we'd get an 8x8 matrix that looks 
 
 ![Naive tensor](assets/naive_tensor.PNG "Naive tensor")
 
-Why doesn't this work?
-* **Encoding pieces with integers** implies some importance to the number. We'd be telling the CNN a pawn (1 or -1) is closer to an "empty piece" (0) than a queen is. Even worse, a white pawn is closer to a black pawn (distance of 2) than a white pawn is to a white king. So **we want to avoid encoding pieces with arbitrary numbers** that give confused meaning to the network.
-* **We don't know important game state details.** We don't know whose turn it is to play because it's not encoded in the 8x8 matrix. In this position, clearly Black and White have both castled, but the board needs to know if castling is on the table. Similarly, we need en-passant rules.
+## Why doesn't this work?
+* **Encoding pieces with integers** implies some importance to the number. We'd be telling the CNN a pawn (1 or -1) is closer to an "empty piece" (0) than a queen is. Even worse, a white pawn is closer to a black pawn (distance of 2) than a white pawn is to a white king. So we want to avoid encoding pieces with arbitrary numbers that give confused meaning to the network.
+* **We don't know important game state details.** We don't know whose turn it is to play because it's not encoded in the 8x8 matrix. In this position, clearly Black and White have both castled, but the board needs to know if castling is on the table. Similarly, we need to encode en-passant rules.
 
+Since we'll pass a tensor into our CNN, we can have **multiple channels**. Consider this design that overcomes the above problems. We have **25 channels** (I'll also refer to these as planes sometimes) that are each 8x8 arrays (so the tensor shape is `[25, 8, 8]`):
+* **Each piece is represented on a different channel**. As seen in the snippet below, `tensor[0:12]` represent the position of a single piece. We use one-hot encoding, so the value is 1 if the piece is on that square, 0 otherwise.
+```python
+_PIECE_PLANES = {
+    (chess.PAWN, chess.WHITE): 0,
+    (chess.KNIGHT, chess.WHITE): 1,
+    (chess.BISHOP, chess.WHITE): 2,
+    (chess.ROOK, chess.WHITE): 3,
+    (chess.QUEEN, chess.WHITE): 4,
+    (chess.KING, chess.WHITE): 5,
+    (chess.PAWN, chess.BLACK): 6,
+    (chess.KNIGHT, chess.BLACK): 7,
+    (chess.BISHOP, chess.BLACK): 8,
+    (chess.ROOK, chess.BLACK): 9,
+    (chess.QUEEN, chess.BLACK): 10,
+    (chess.KING, chess.BLACK): 11
+}
 
-<div class="epigraph">
-  <blockquote>
-    <p><em>Are engines strong because <b>they calculate tactics</b> well...</em></p>
-    <p><em>... or because <b>they've learned strategy</b>?</em></p>
-  </blockquote>
-</div>
+# later...
 
-**I'm building an AlphaZero-style chess engine** from scratch: *a system that learns chess without being told what "good" chess looks like.*
+    # Create the 12 position planes
+    for square, piece in board.piece_map().items():
+        # look up the plane
+        plane = _PIECE_PLANES[(piece.piece_type, piece.color)]
+        row, col =  get_rc_from_square(square)
+        res[plane, row, col] = 1.0
+```
+* **`tensor[12]` tells us whose turn it is.** It is an 8x8 array that is 1 if it's White's turns and 0 if it's Black.
+* **`tensor[13:17]` consists of castling rights.** So if white has kingside castling rights, the entire 8x8 channel is 1, else it's 0. These 4 channels are 8x8 arrays that are either all 0s or 1s. 
+```python
+    # set the castling planes
+    if board.has_kingside_castling_rights(chess.WHITE):
+        res[13, :, :] = 1.0
+    if board.has_queenside_castling_rights(chess.WHITE):
+        res[14, :, :] = 1.0
+    if board.has_kingside_castling_rights(chess.BLACK):
+        res[15, :, :] = 1.0
+    if board.has_queenside_castling_rights(chess.BLACK):
+        res[16, :, :] = 1.0
+```
+* **`tensor[17:25]` contains en-passant rules** Similar to above, these 8 channels represent each of the 8 files and tells us whether that file has an en-passant move available.
+```python
+    # en passant planes
+    # only one file can be true at once
+    if board.ep_square is not None:
+        ep_file = chess.square_file(board.ep_square)
+        res[17+ep_file, :, :] = 1.0
+```
+## Visualizing our final tensor design
+So how does the Levitsky-Marshall move look?
+![Levitsky-Marshall (1912) Tensor](assets/chess_tensor_design.png "Levitsky-Marshall (1912) Tensor")
 
-## There are two philosophies to train a chess engine
+We've successfully encoded all the details of the game state (position info, turn info, castling, en-passant). The **downside** of this approach is we are using a lot of space to represent turn info and other rules. In these cases, we are making the entire matrix of 64 numbers either 1 or 0 instead of representing it as a single bit.
 
-1. **Teach the engine "good" chess.**  
-   We provide heuristics that encode our opinions of what strong play looks like. This is how Deep Blue beat Kasparov, and how earlier versions of Stockfish and Houdini worked.
-   <label for="mn-1" class="margin-toggle">⊕</label>
-   <input type="checkbox" id="mn-1" class="margin-toggle"/>
-   <span class="marginnote quote">
-     In Approach 1, the machine never discovers chess; it just applies human ideas faster than humans can.
-   </span>
+This redundancy increases memory usage and slightly slows down training, but it makes the data **spatially uniform**. This means every piece of information, whether local or global, lives in an 8×8 array. That consistency simplifies the model design, since a convolutional network can process all planes in the same way without needing special handling for scalar features.
 
-   Some heuristics we can encode:
-   - Rewarding material (Queen > Rook > Bishop ≈ Knight > Pawn)
-   - Control of the center (e.g. "A knight on the rim is dim.")
-   - King safety
-   - Different priorities across opening, middlegame, endgame
-
-2. **Let the machine discover chess for itself.**  
-   Just tell the machine the rules of the game and nothing else (no human guidance of what "good" chess is). The machine has to learn chess from first principles. AlphaZero and Leela are trained in this way.
-
-It always felt mystical to me that a machine could see enough games and learn chess better than I've learned it through focused study, and I want to replicate that.
-
-This is the first in a series of engineering notes. The goal isn't to show just the result, but to walk through reasoning behind decisions like:
-
-- Choosing a representation for the board and pieces
-- Selecting a model
-- Building a search and evaluation function
-- Other decisions I don't know I have to make yet!
-
-I intend the last note to be a look inside the layers of the final model, answering:
-
-<div class="epigraph">
-  <blockquote>
-    <b>What does a machine actually learn about chess when we give it no human guidance?</b>
-  </blockquote>
-</div>
-
-## High-level architecture and plan
-I'm picking some default decisions based on my initial review of the existing literature (although I will  likely change many of these decisions as I proceed with the project). Before I draw any diagrams, let me lay out my anticipated steps:
-   <label for="mn-1" class="margin-toggle">⊕</label>
-   <input type="checkbox" id="mn-1" class="margin-toggle"/>
-   <span class="marginnote quote">
-   Some important literature that helped me get started: <a href="https://www.science.org/doi/10.1126/science.aar6404" target="_blank">
-        Silver et al. (2018), *A general reinforcement learning algorithm that masters chess, shogi, and Go through self-play*
-    </a>, <a href="https://www.nature.com/articles/s41586-020-03051-4">Schrittwieser et al. (2020), *Mastering Atari, Go, chess and shogi by planning with a learned model*</a>, and <a href="https://lczero.org/dev/old/nn/">LeelaZero dev docs</a>.
-   </span>
-
-![Quick sketch of inputs / outputs](assets/sketch_diagram.PNG "Quick sketch of inputs / outputs")
-   <span class="marginnote quote">
-   A legendary moment from Levitsky-Marshall (1912). The model should ideally predict this position is winning for Black and find the stunning move Marshall found.
-
-   As an aside, Marshall is one of my favorite players and the Marshall Attack is my go-to when faced with a Ruy Lopez as black.
-   </span>
-
-1. **Train a baseline model off high-quality games.** My baseline model will be trained on a convolutional neural net (CNN), similar to how image classification models are trained. I'll write an article later about my rationale why. The **input** to the model is a **board tensor** that I'll write about designing in the next article. The model will have two heads:
-    1. A **Value Head** will predict the expected outcome of the game based on the current position and will output a number in $[-1, 1]$. A value close to -1 indicates Black is winning, a value close to 1 indicates White is winning, and a value close to 0 indicates a drawish position.
-    2. A **Policy Head** will predict the next move. It will be a probability distribution over all moves. Illegal moves should have a probability of zero and the stronger the move (according to the model), the closer to 1 that move's output will be. One interesting question to consider is: What is the shape of the policy head and why? I'm considering a few options.
-2. **Make my baseline model playable.** This will involve creating a Search function. The two choices here are (1) Monte Carlo Search Tree (2) Minmax with Alpha Beta Pruning. I don't know enough about the tradeoffs to have a prior opinion on my approach. This is something I'll learn as I proceed through the project.
-3. **Improve the model through Reinforcement Learning self-play.** Today, I know very little about reinforcement learning
-4. **Look inside the neural net and mine the model's secrets.** Hopefully, I can serve the model so you can play with it and peek inside as well. I'm curious to see if the different layers of the net will look for open files, pins, forks, etc. in the same way that humans do.
+I'm using this tensor design to encode games in preparation of passing it through a CNN. In the next article, I plan to cover decisions around selecting training data and a more concrete CNN design.

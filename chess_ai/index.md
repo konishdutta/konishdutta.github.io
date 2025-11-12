@@ -3,8 +3,8 @@ title: Teaching machines to beat me in chess
 layout: default
 sidebar_title: "Contents"
 sidebar_links:
-  - { title: "Teaching machines to beat me in chess", url: "chess_ai/index.md" }
-  - { title: "Designing the board tensor", url: "chess_ai/board_tensor.md" }
+  - { title: "Teaching machines to beat me in chess", url: "chess_ai/index.html" }
+  - { title: "Designing the board tensor", url: "chess_ai/board_tensor.html" }
 ---
 
 # Teaching machines chess from first principles
@@ -80,3 +80,5 @@ I'm picking some default decisions based on my initial review of the existing li
         Silver et al. (2018), *A general reinforcement learning algorithm that masters chess, shogi, and Go through self-play*
     </a>, <a href="https://www.nature.com/articles/s41586-020-03051-4">Schrittwieser et al. (2020), *Mastering Atari, Go, chess and shogi by planning with a learned model*</a>, and <a href="https://lczero.org/dev/old/nn/">LeelaZero dev docs</a>.
    </span>
+
+Next, read about how I [board_tensor.html](designed the board tensor) for my model.
