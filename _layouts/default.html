@@ -15,7 +15,19 @@
 </head>
 
 <body class="tufte">
-  <article class="content container">
+  <!-- LEFT MARGIN SIDEBAR -->
+  <nav class="sidebar">
+    <h2 class="sidebar-title">{{ page.sidebar_title | default: "On this page" }}</h2>
+    <ul class="sidebar-list">
+      <!-- Option A: manual links from front matter -->
+      {% if page.sidebar_links %}
+        {% for link in page.sidebar_links %}
+          <li><a href="{{ link.url | relative_url }}">{{ link.title }}</a></li>
+        {% endfor %}
+      {% endif %}
+    </ul>
+  </nav>
+  <article class="content container has-sidebar">
     <section class="main">
       {{ content }}
     </section>
