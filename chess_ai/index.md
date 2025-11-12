@@ -1,6 +1,10 @@
 ---
 title: Teaching machines to beat me in chess
 layout: default
+sidebar_title: "Contents"
+sidebar_links:
+  - { title: "Teaching machines to beat me in chess", url: "index.md" }
+  - { title: "Designing the board tensor", url: "board_tensor.md" }
 ---
 
 # Teaching machines chess from first principles
@@ -56,7 +60,7 @@ I intend the last note to be a look inside the layers of the final model, answer
 I'm picking some default decisions based on my initial review of the existing literature (although I will  likely change many of these decisions as I proceed with the project). Before I draw any diagrams, let me lay out my anticipated steps:
 
 ![Quick sketch of inputs / outputs](assets/sketch_diagram.PNG "Quick sketch of inputs / outputs")
-   <label for="mn-1" class="margin-toggle">⊕</label>
+   <label for="mn-2" class="margin-toggle">⊕</label>
    <input type="checkbox" id="mn-1" class="margin-toggle"/>
    <span class="marginnote quote">
    A legendary moment from Levitsky-Marshall (1912). The model should ideally predict this position is winning for Black and find the stunning move Marshall found. As an aside, Marshall is one of my favorite players and the Marshall Attack is my go-to when faced with a Ruy Lopez as black.
@@ -69,7 +73,7 @@ I'm picking some default decisions based on my initial review of the existing li
 3. **Improve the model through Reinforcement Learning self-play.** Today, I know very little about reinforcement learning
 4. **Look inside the neural net and mine the model's secrets.** Hopefully, I can serve the model so you can play with it and peek inside as well. I'm curious to see if the different layers of the net will look for open files, pins, forks, etc. in the same way that humans do.
 
-   <label for="mn-1" class="margin-toggle">⊕</label>
+   <label for="mn-3" class="margin-toggle">⊕</label>
    <input type="checkbox" id="mn-1" class="margin-toggle"/>
    <span class="marginnote quote">
    Some important literature that helped me get started: <a href="https://www.science.org/doi/10.1126/science.aar6404" target="_blank">
