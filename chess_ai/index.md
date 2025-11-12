@@ -62,7 +62,7 @@ I'm picking some default decisions based on my initial review of the existing li
     </a>, <a href="https://www.nature.com/articles/s41586-020-03051-4">Schrittwieser et al. (2020), *Mastering Atari, Go, chess and shogi by planning with a learned model*</a>, and <a href="https://lczero.org/dev/old/nn/">LeelaZero dev docs</a>.
    </span>
 
-![Quick sketch of inputs / outputs](assets/sketch_diagram.png "Quick sketch of inputs / outputs")
+![Quick sketch of inputs / outputs](assets/sketch_diagram.PNG "Quick sketch of inputs / outputs")
    <span class="marginnote quote">
    A legendary moment from Levitsky-Marshall (1912). The model should ideally predict this position is winning for Black and find the stunning move Marshall found.
 
