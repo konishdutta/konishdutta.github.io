@@ -3,8 +3,8 @@ title: Teaching machines to beat me in chess
 layout: default
 sidebar_title: "Contents"
 sidebar_links:
-  - { title: "Teaching machines to beat me in chess", url: "index.md" }
-  - { title: "Designing the board tensor", url: "board_tensor.md" }
+  - { title: "Teaching machines to beat me in chess", url: "chess_ai/index.md" }
+  - { title: "Designing the board tensor", url: "chess_ai/board_tensor.md" }
 ---
 
 # Teaching machines chess from first principles
