@@ -1,7 +1,5 @@
 /* -----------------------------------------------------------
-   Konish — Tufte "Japandi" skin (custom.css)
-   Calm neutrals, warm emphasis, quiet hierarchy
-   Works with: tufte.css, dark.css
+   Tufte "Japandi"
 ------------------------------------------------------------ */
 
 /* Fonts */
@@ -78,6 +76,10 @@
   --epi-top: 1.25rem;
   --epi-bottom: 1.25rem;
   --epi-inner-gap: .28rem;
+
+  /* sidebar */
+  --sidebar-width: 18rem;   /* width of the left sidebar */
+  --sidebar-top: 6rem;      /* how far from the top it starts */
 }
 
 /* -------- Base / layout -------- */
@@ -222,6 +224,53 @@ hr { background: linear-gradient(to right, transparent, color-mix(in srgb, var(-
 .content.container .epigraph + :is(p,ul,ol,blockquote,figure,pre,hr,h2,h3,h4){
   margin-top: var(--epi-bottom) !important;
 }
+
+/* Sidebar */
+/* Left-margin sidebar (pairs with <nav class="sidebar"> in default.html) */
+.sidebar{
+  position: fixed;  /* take it out of document flow */
+  top: var(--sidebar-top);
+  /* place it in Tufte's left margin: center (50%) minus half content minus sidebar+gutter */
+  left: calc(50% - (var(--measure) / 2 + var(--sidebar-width) + 1.25rem));
+  width: var(--sidebar-width);
+  max-height: calc(100vh - var(--sidebar-top) - 2rem);
+  overflow: auto;
+  padding-right: .5rem;
+  line-height: 1.35;
+  font-size: .95rem;
+  z-index: 0; /* sits behind any floating notes */
+}
+
+.sidebar-title{
+  font-size: .95rem;
+  margin: 0 0 .5rem 0;
+  font-weight: 600;
+  opacity: .8;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  color: var(--ink-dim);
+}
+
+.sidebar-list{ list-style: none; margin: 0; padding: 0; }
+.sidebar-list li{ margin: .25rem 0; }
+.sidebar-list a{
+  text-decoration: none;
+  color: var(--accent);
+  border-bottom: 1px solid transparent;
+}
+.sidebar-list a:hover{
+  color: var(--accent-strong);
+  border-bottom-color: currentColor;
+}
+
+/* Current page highlight (works if you add `.active` in the Liquid loop) */
+.sidebar-list li.active > a{ font-weight: 600; opacity: 1; }
+
+/* Hide the sidebar on narrow screens */
+@media (max-width: 1100px){
+  .sidebar{ display: none; }
+}
+
 
 /* Mobile comfort */
 @media (max-width: 640px){
