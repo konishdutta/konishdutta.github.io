@@ -54,19 +54,12 @@ I intend the last note to be a look inside the layers of the final model, answer
 
 ## High-level architecture and plan
 I'm picking some default decisions based on my initial review of the existing literature (although I will  likely change many of these decisions as I proceed with the project). Before I draw any diagrams, let me lay out my anticipated steps:
+
+![Quick sketch of inputs / outputs](assets/sketch_diagram.PNG "Quick sketch of inputs / outputs")
    <label for="mn-1" class="margin-toggle">⊕</label>
    <input type="checkbox" id="mn-1" class="margin-toggle"/>
    <span class="marginnote quote">
-   Some important literature that helped me get started: <a href="https://www.science.org/doi/10.1126/science.aar6404" target="_blank">
-        Silver et al. (2018), *A general reinforcement learning algorithm that masters chess, shogi, and Go through self-play*
-    </a>, <a href="https://www.nature.com/articles/s41586-020-03051-4">Schrittwieser et al. (2020), *Mastering Atari, Go, chess and shogi by planning with a learned model*</a>, and <a href="https://lczero.org/dev/old/nn/">LeelaZero dev docs</a>.
-   </span>
-
-![Quick sketch of inputs / outputs](assets/sketch_diagram.PNG "Quick sketch of inputs / outputs")
-   <span class="marginnote quote">
-   A legendary moment from Levitsky-Marshall (1912). The model should ideally predict this position is winning for Black and find the stunning move Marshall found.
-
-   As an aside, Marshall is one of my favorite players and the Marshall Attack is my go-to when faced with a Ruy Lopez as black.
+   A legendary moment from Levitsky-Marshall (1912). The model should ideally predict this position is winning for Black and find the stunning move Marshall found. As an aside, Marshall is one of my favorite players and the Marshall Attack is my go-to when faced with a Ruy Lopez as black.
    </span>
 
 1. **Train a baseline model off high-quality games.** My baseline model will be trained on a convolutional neural net (CNN), similar to how image classification models are trained. I'll write an article later about my rationale why. The **input** to the model is a **board tensor** that I'll write about designing in the next article. The model will have two heads:
@@ -75,3 +68,11 @@ I'm picking some default decisions based on my initial review of the existing li
 2. **Make my baseline model playable.** This will involve creating a Search function. The two choices here are (1) Monte Carlo Search Tree (2) Minmax with Alpha Beta Pruning. I don't know enough about the tradeoffs to have a prior opinion on my approach. This is something I'll learn as I proceed through the project.
 3. **Improve the model through Reinforcement Learning self-play.** Today, I know very little about reinforcement learning
 4. **Look inside the neural net and mine the model's secrets.** Hopefully, I can serve the model so you can play with it and peek inside as well. I'm curious to see if the different layers of the net will look for open files, pins, forks, etc. in the same way that humans do.
+
+   <label for="mn-1" class="margin-toggle">⊕</label>
+   <input type="checkbox" id="mn-1" class="margin-toggle"/>
+   <span class="marginnote quote">
+   Some important literature that helped me get started: <a href="https://www.science.org/doi/10.1126/science.aar6404" target="_blank">
+        Silver et al. (2018), *A general reinforcement learning algorithm that masters chess, shogi, and Go through self-play*
+    </a>, <a href="https://www.nature.com/articles/s41586-020-03051-4">Schrittwieser et al. (2020), *Mastering Atari, Go, chess and shogi by planning with a learned model*</a>, and <a href="https://lczero.org/dev/old/nn/">LeelaZero dev docs</a>.
+   </span>
