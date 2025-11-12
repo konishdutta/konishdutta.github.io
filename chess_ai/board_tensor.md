@@ -1,11 +1,26 @@
 ---
-title: Teaching machines to beat me in chess
+title: Designing the board tensor
 layout: default
 ---
 
 # Designing the board tensor
 
-In order for my model to learn to play good chess, I must give it a **representation of a board** as an input. How should I design such a representation?
+In order for my model to learn to play good chess, I must give it a **representation of a board** as an input. Since chess is played on an 8x8 board, why not just represent my board as an 8x8 array?
+
+The problem is that the board consists of different pieces (pawns, bishops, knights, rooks, queen, king). How should I tell my model about these pieces?
+
+Since there are 6 pieces, I could pick 1 for pawn, 2 for bishop, 3 for knight, 4 for rook, 5 for queen, 6 for king. And I could make this negative for the black pieces. 0 could mean there are no pieces there.
+
+Consider this position from Levitsky-Marshall (1912):
+![Levitsky-Marshall (1912)](assets/levitsky_marshall.PNG "Levitsky-Marshall (1912)")
+
+If we were to encode it with the above logic, we'd get an 8x8 matrix that looks like this:
+![Naive tensor](assets/naive_tensor.PNG "Naive tensor")
+
+Why doesn't this work?
+* **Encoding pieces with integers** implies some importance to the number. We'd be telling the CNN a pawn (1 or -1) is closer to an "empty piece" (0) than a queen is. Even worse, a white pawn is closer to a black pawn (distance of 2) than a white pawn is to a white king. So **we want to avoid encoding pieces with arbitrary numbers** that give confused meaning to the network.
+* **We don't know important game state details.** We don't know whose turn it is to play because it's not encoded in the 8x8 matrix. In this position, clearly Black and White have both castled, but the board needs to know if castling is on the table. Similarly, we need en-passant rules.
+
 
 <div class="epigraph">
   <blockquote>
